@@ -8,8 +8,9 @@ import {sync} from 'vuex-router-sync'
 import 'vuetify/dist/vuetify.min.css'
 import store from '@/store/store'
 
-Vue.use(Vuetify)
-Vue.config.productionTip = false
+
+Vue.use(Vuetify);
+Vue.config.productionTip = false;
 sync(store, router);
 
 /* eslint-disable no-new */
@@ -19,4 +20,4 @@ new Vue({
   store,
   template: '<App/>',
   components: { App }
-})
+});
