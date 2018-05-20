@@ -1,7 +1,6 @@
 <template>
   <v-card>
     <v-card-text style="height: 300px;" class="grey lighten-5">
-      <v-progress-circular v-show="loading" indeterminate color="primary"></v-progress-circular>
       <EntryList>
       </EntryList>
     </v-card-text>
@@ -20,7 +19,7 @@ export default {
   components: {
       EntryList
   },
-  method: {
+  methods: {
     addExpense () {
         this.$router.push("/new-entry");
     }

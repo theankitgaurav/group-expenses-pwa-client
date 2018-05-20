@@ -1,5 +1,6 @@
 <template>
   <v-list two-line>
+    <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
     <template v-for="item in entries">
       <v-list-tile :key="item.category" avatar>
         <v-list-tile-content>
@@ -16,7 +17,8 @@ import api from "@/services/api";
 export default {
   data () {
       return {
-          entries: []
+          entries: [],
+          loading: true
       };
   },
   async created() {
@@ -24,7 +26,6 @@ export default {
   },
   methods: {
     async refreshHome() {
-      this.loading = true;
       try {
           const entriesFromServer = await api.getEntries();
           this.entries = entriesFromServer.data.data;
