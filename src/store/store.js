@@ -12,10 +12,10 @@ export default new Vuex.Store({
         isLoggedIn: false
     },
     getters: {
-        nameOfUser: state => {
+        nameOfUser (state) {
             return (state.user) ? state.user.username : "Stranger";
         },
-        isLoggedIn: state => state.isLoggedIn
+        isLoggedIn (state) { return state.isLoggedIn;}
     },
     mutations: {
         setToken (state, token) {

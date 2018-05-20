@@ -1,6 +1,5 @@
 <template>
   <v-list two-line>
-    <v-progress-linear v-show="loading" :indeterminate="true"></v-progress-linear>
     <template v-for="item in entries">
       <v-list-tile :key="item.category" avatar>
         <v-list-tile-content>
@@ -9,6 +8,7 @@
         </v-list-tile-content>
       </v-list-tile>
     </template>
+    <v-progress-circular v-show="loading" :indeterminate="true"></v-progress-circular>
   </v-list>
 </template>
 
@@ -21,7 +21,7 @@ export default {
           loading: true
       };
   },
-  async created() {
+  async mounted() {
     this.refreshHome();
   },
   methods: {

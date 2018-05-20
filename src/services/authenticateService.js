@@ -1,4 +1,5 @@
 import baseApi from '@/services/baseApi'
+import Store from '@/store/store'
 
 export default {
     register (credentials) {
@@ -6,5 +7,10 @@ export default {
     },
     login (credentials) {
         return baseApi().post('api/signin', credentials);
+    },
+    logout () {
+        Store.dispatch("setIsLoggedIn", false);
+        Store.dispatch("setToken", false);
+        Store.dispatch("setUser", false);
     }
 }
