@@ -7,8 +7,8 @@
         <v-btn @click="saveEntry">Save</v-btn>
       </v-toolbar>
       <v-form>
-        <v-text-field v-model="category" name="category" placeholder="Category"></v-text-field>
-        <v-text-field v-model="amount" type="number" placeholder="Amount"></v-text-field>
+        <v-text-field v-model="category" label="Category" required></v-text-field>
+        <v-text-field v-model="amount" label="Amount" type="number" required></v-text-field>
         <!-- <v-text-field v-model="forUser" placeholder="Expense By"></v-text-field> -->
       </v-form>
     </v-flex>
@@ -16,18 +16,29 @@
 </template>
 
 <script>
+import api from '@/services/api';
 export default {
-    data () {
-        return {
-            category: "",
-            amount: "",
-            forUser: ""
-        }
-    },
-    methods: {
-        saveEntry () {
-            console.log(this.$data)
-        }
+  data() {
+    return {
+      category: "",
+      amount: "",
+      forUser: ""
     }
+  },
+  methods: {
+    async saveEntry() {
+      const newPost = {
+        category: this.category,
+        amount: this.amount
+      };
+      try {
+        const res = await api.saveEntry(newPost);
+        console.log(`New post saved: `, res);
+      } catch (err) {
+        console.error('Error saving new post: ', err);
+      }
+    }
+  }
 }
+
 </script>

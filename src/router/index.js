@@ -25,7 +25,7 @@ export default new Router({
       component: HomeView
     },
     {
-      path: '/newEntry',
+      path: '/new-entry',
       name: 'newEntry',
       component: PostEntryView
     }

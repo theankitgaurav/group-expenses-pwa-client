@@ -37,6 +37,7 @@ export default {
         console.log(`Response from server: `, res);
         this.$store.dispatch("setToken", res.data.token);
         this.$store.dispatch("setUser", res.data.user);
+        this.$store.dispatch("setIsLoggedIn", true);
         this.$router.push("/home");
       } catch (err) {
         this.error = err.response;
