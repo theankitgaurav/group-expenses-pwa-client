@@ -7,6 +7,7 @@
         <v-btn @click="saveEntry">Save</v-btn>
       </v-toolbar>
       <v-form>
+        <div v-html="error" class="error" />
         <v-text-field v-model="category" label="Category" required></v-text-field>
         <v-text-field v-model="amount" label="Amount" type="number" required></v-text-field>
         <!-- <v-text-field v-model="forUser" placeholder="Expense By"></v-text-field> -->
@@ -22,7 +23,8 @@ export default {
     return {
       category: "",
       amount: "",
-      forUser: ""
+      forUser: "",
+      error: null
     }
   },
   methods: {
@@ -35,10 +37,17 @@ export default {
         const res = await api.saveEntry(newPost);
         console.log(`New post saved: `, res);
       } catch (err) {
-        console.error('Error saving new post: ', err);
+        this.error = err.response.data;
+        console.log('Error saving new post: ', err);
       }
     }
   }
 }
 
 </script>
+
+<style>
+.error {
+  color: red;
+}
+</style>

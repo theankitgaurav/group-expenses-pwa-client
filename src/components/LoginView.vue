@@ -40,8 +40,8 @@ export default {
         this.$store.dispatch("setIsLoggedIn", true);
         this.$router.push("/home");
       } catch (err) {
-        this.error = err.response;
-        console.error(err);
+        this.error = err.response.data.error;
+        console.log(err);
       }
     }
   }

@@ -1,40 +1,28 @@
 <template>
-    <div> 
-        Welcome home, {{nameOfUser}}
-        <ul>
-            <li v-for="entry in entries" :key="entry.id">
-                {{entry.category}}: {{entry.amount}}
-            </li>
-        </ul>
-    </div>
+  <v-card>
+    <v-card-text style="height: 300px;" class="grey lighten-5">
+      <v-progress-circular v-show="loading" indeterminate color="primary"></v-progress-circular>
+      <EntryList>
+      </EntryList>
+    </v-card-text>
+    <v-card-text style="height: 100px; position: relative">
+      <v-btn @click="addExpense" absolute dark fab top right color="pink">
+        <v-icon>add</v-icon>
+      </v-btn>
+    </v-card-text>
+  </v-card>
 </template>
 
+
 <script>
-import api from "@/services/api";
+import EntryList from '@/components/EntryList.vue';
 export default {
-  data () {
-      return {
-          entries: []
-      };
+  components: {
+      EntryList
   },
-  computed: {
-    nameOfUser() {
-      return this.$store.getters.nameOfUser;
-    }
-  },
-  async created() {
-    this.refreshHome();
-  },
-  methods: {
-    async refreshHome() {
-      this.loading = true;
-      try {
-          const entriesFromServer = await api.getEntries();
-          this.entries = entriesFromServer.data.data;
-          this.loading = false;
-      } catch (err) {
-          console.error(err);
-      }
+  method: {
+    addExpense () {
+        this.$router.push("/new-entry");
     }
   }
 };
