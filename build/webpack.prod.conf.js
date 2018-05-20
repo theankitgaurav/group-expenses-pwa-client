@@ -13,6 +13,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const loadMinified = require('./load-minified')
+const RemoveServiceWorkerPlugin = require('webpack-remove-serviceworker-plugin')
 
 const env = config.build.env
 
@@ -105,7 +106,9 @@ const webpackConfig = merge(baseWebpackConfig, {
       staticFileGlobs: ['dist/**/*.{js,html,css}'],
       minify: true,
       stripPrefix: 'dist/'
-    })
+    }),
+    // remove previous service workers after every deployment
+    new RemoveServiceWorkerPlugin({ filename: 'service-worker.js' })
   ]
 })
 

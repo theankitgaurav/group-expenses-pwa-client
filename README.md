@@ -2,6 +2,10 @@
 
 > PWA client for group expenses REST api
 
+# TODO
++ Register a new service-worker after every deplyment in production, 
+making sure the previous worker is unregistered
+
 ## Build Setup
 
 ``` bash
