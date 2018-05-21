@@ -33,7 +33,15 @@ export default {
       return this.$store.getters.nameOfUser;
     }
   },
+  created () {
+    if (this.$store.isLoggedIn) {
+      goHome();
+    }
+  },
   methods: {
+    goHome() {
+      this.$router.replace('/home');
+    },
     login() {
       this.$router.push('/login');
     },
