@@ -3,8 +3,8 @@
     <v-layout row wrap>
       <v-flex xs12 sm12 md6>
         <v-toolbar>
-          <v-toolbar-side-icon></v-toolbar-side-icon>
-          <router-link headline @click.native="hideMenu" to="/" transition="slide-x-transition" class="header">Expenses</router-link>
+          <v-toolbar-side-icon @click="sidebar = !sidebar"></v-toolbar-side-icon>
+          <v-toolbar-title @click="goHome" >{{title}}</v-toolbar-title>
           <span v-show="isLoggedIn">{{nameOfUser}}</span>
           <v-spacer></v-spacer>
           <a v-if="!isLoggedIn" @click="login">Login</a>
@@ -25,7 +25,15 @@
 <script>
 export default {
   name: 'app',
+  data () {
+    return {
+      sidebar: false
+    }
+  },
   computed: {
+    title () {
+      return this.$store.getters.title;
+    },
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
     },
@@ -34,7 +42,7 @@ export default {
     }
   },
   created () {
-    if (this.$store.isLoggedIn) {
+    if (this.$store.getters.isLoggedIn) {
       goHome();
     }
   },

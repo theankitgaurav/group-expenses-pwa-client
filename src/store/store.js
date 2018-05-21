@@ -9,13 +9,15 @@ export default new Vuex.Store({
     state: {
         token: null,
         user: null,
-        isLoggedIn: false
+        isLoggedIn: false,
+        title: `Group Expenses`
     },
     getters: {
         nameOfUser (state) {
             return (state.user) ? state.user.username : "Stranger";
         },
-        isLoggedIn (state) { return state.isLoggedIn;}
+        isLoggedIn (state) { return state.isLoggedIn;},
+        title (state) { return state.title}
     },
     mutations: {
         setToken (state, token) {
