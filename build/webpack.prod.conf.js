@@ -108,7 +108,7 @@ const webpackConfig = merge(baseWebpackConfig, {
       stripPrefix: 'dist/'
     }),
     // remove previous service workers after every deployment
-    new RemoveServiceWorkerPlugin({ filename: 'service-worker.js' })
+    // new RemoveServiceWorkerPlugin({ filename: 'service-worker.js' })
   ]
 })
 
