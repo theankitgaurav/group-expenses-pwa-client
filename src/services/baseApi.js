@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 export default () => {
     const isProd = process.env.NODE_ENV === 'production'
     return axios.create({

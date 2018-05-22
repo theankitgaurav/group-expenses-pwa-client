@@ -20,7 +20,7 @@
 
 
 <script>
-import api from '@/services/api';
+import entryService from '@/services/entryService';
 export default {
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
         amount: this.amount
       };
       try {
-        const res = await api.saveEntry(newPost);
+        const res = await entryService.saveEntry(newPost);
         console.log(`New post saved: `, res);
       } catch (err) {
         this.error = err.response.data;

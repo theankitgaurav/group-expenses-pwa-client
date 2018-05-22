@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import api from "@/services/api";
+import entryService from "@/services/entryService";
 export default {
   data () {
       return {
@@ -27,7 +27,7 @@ export default {
   methods: {
     async refreshHome() {
       try {
-          const entriesFromServer = await api.getEntries();
+          const entriesFromServer = await entryService.getEntries();
           this.entries = entriesFromServer.data.data;
           this.loading = false;
       } catch (err) {

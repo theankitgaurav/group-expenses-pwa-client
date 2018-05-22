@@ -5,12 +5,11 @@ import RegisterView from '@/components/RegisterView'
 import LoginView from '@/components/LoginView'
 import HomeView from '@/components/HomeView'
 import PostEntryView from '@/components/PostEntryView'
-import authenticateService from '@/services/authenticateService'
 
 Vue.use(Router);
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isLoggedIn) {
+  if (!store.getters.isAuthenticated) {
     next()
     return
   }
@@ -18,7 +17,7 @@ const ifNotAuthenticated = (to, from, next) => {
 }
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isLoggedIn) {
+  if (store.getters.isAuthenticated) {
     next()
     return
   }
@@ -57,25 +56,5 @@ const router = new Router({
     }
   ]
 });
-
-// Navigation guard to protect secure routes from 
-// un-authorized access
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     // this route requires auth, check if logged in
-//     // if not, redirect to login page.
-//     if (!Store.getters.isLoggedIn) {
-//       authenticateService.logout();
-//       next({
-//         path: '/login',
-//         query: { redirect: to.fullPath }
-//       })
-//     } else {
-//       next()
-//     }
-//    } else {
-//     next() // make sure to always call next()!
-//   }
-// })
 
 export default router;
