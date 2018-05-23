@@ -21,7 +21,7 @@ export default {
           loading: true
       };
   },
-  async mounted() {
+  async created() {
     this.refreshHome();
   },
   methods: {

@@ -34,7 +34,7 @@ export default {
         this.$router.push('/home');
       } catch (err) {
         console.log(`Error during auth`, err);
-        this.error = err;
+        this.error = `Error during auth`;
       }
     }
   }
