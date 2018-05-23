@@ -1,12 +1,19 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store/store'
-import RegisterView from '@/components/RegisterView'
-import LoginView from '@/components/LoginView'
-import HomeView from '@/components/HomeView'
-import PostEntryView from '@/components/PostEntryView'
 
 Vue.use(Router);
+/**
+ * Function to dynamically import a Vue component
+ * FIXME: ESLint may raise error due to the fact that 
+ * it can’t recognize the import function
+ * @param {any} view 
+ * @returns 
+ */
+function loadView(view) {
+  return () => import(/* webpackChunkName: "view-[request]" */ `@/components/${view}.vue`)
+}
+
 
 const ifNotAuthenticated = (to, from, next) => {
   if (!store.getters.isAuthenticated) {
@@ -33,25 +40,25 @@ const router = new Router({
     {
       path: '/register',
       name: 'register',
-      component: RegisterView,
+      component: loadView('RegisterView'),
       beforeEnter: ifNotAuthenticated      
     },
     {
       path: '/login',
       name: 'login',
-      component: LoginView,
+      component: loadView('LoginView'),
       beforeEnter: ifNotAuthenticated
     },
     {
       path: '/home',
       name: 'home',
-      component: HomeView,
+      component: loadView('HomeView'),
       beforeEnter: ifAuthenticated
     },
     {
       path: '/new-entry',
       name: 'newEntry',
-      component: PostEntryView,
+      component: loadView('PostEntryView'),
       beforeEnter: ifAuthenticated
     }
   ]
