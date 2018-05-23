@@ -5,12 +5,11 @@ import RegisterView from '@/components/RegisterView'
 import LoginView from '@/components/LoginView'
 import HomeView from '@/components/HomeView'
 import PostEntryView from '@/components/PostEntryView'
-import authenticateService from '@/services/authenticateService'
 
 Vue.use(Router);
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isLoggedIn) {
+  if (!store.getters.isAuthenticated) {
     next()
     return
   }
@@ -18,7 +17,7 @@ const ifNotAuthenticated = (to, from, next) => {
 }
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isLoggedIn) {
+  if (store.getters.isAuthenticated) {
     next()
     return
   }

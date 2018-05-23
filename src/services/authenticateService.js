@@ -1,16 +1,11 @@
-import baseApi from '@/services/baseApi'
-import Store from '@/store/store'
+import axios from 'axios';
+import config from '@/config.js';
 
 export default {
-    register (credentials) {
-        return baseApi().post('api/signup', credentials);
+    async register (credentials) {
+        return axios.post(config.baseURL + '/api/signup', credentials);
     },
-    login (credentials) {
-        return baseApi().post('api/signin', credentials);
-    },
-    logout () {
-        Store.dispatch("setIsLoggedIn", false);
-        Store.dispatch("setToken", false);
-        Store.dispatch("setUser", false);
+    async login (credentials) {
+        return axios.post(config.baseURL + '/api/signin', credentials);
     }
 }

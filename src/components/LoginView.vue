@@ -18,7 +18,6 @@
 
 
 <script>
-import authenticateService from "@/services/authenticateService";
 export default {
   data() {
     return {
@@ -29,23 +28,18 @@ export default {
   },
   methods: {
     async login() {
+      const { username, password } = this;
       try {
-        const res = await authenticateService.login({
-          username: this.username,
-          password: this.password
-        });
-        console.log(`Response from server: `, res);
-        this.$store.dispatch("setToken", res.data.token);
-        this.$store.dispatch("setUser", res.data.user);
-        this.$store.dispatch("setIsLoggedIn", true);
-        this.$router.push("/home");
+        await this.$store.dispatch("authRequest", { username, password });
+        this.$router.push('/home');
       } catch (err) {
-        this.error = err.response.data.error;
-        console.log(err);
+        console.log(`Error during auth`, err);
+        this.error = err;
       }
     }
   }
 };
+
 </script>
 
 <style scoped>

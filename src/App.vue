@@ -5,9 +5,8 @@
         <v-toolbar>
           <v-toolbar-side-icon @click="sidebar = !sidebar"></v-toolbar-side-icon>
           <v-toolbar-title @click="goHome" >{{title}}</v-toolbar-title>
-          <span v-show="isLoggedIn">{{nameOfUser}}</span>
           <v-spacer></v-spacer>
-          <a v-if="!isLoggedIn" @click="login">Login</a>
+          <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
           <a v-else @click="logout">Logout</a>
         </v-toolbar>
         <main>
@@ -27,23 +26,8 @@ export default {
   name: 'app',
   data () {
     return {
-      sidebar: false
-    }
-  },
-  computed: {
-    title () {
-      return this.$store.getters.title;
-    },
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-    nameOfUser() {
-      return this.$store.getters.nameOfUser;
-    }
-  },
-  created () {
-    if (this.$store.getters.isLoggedIn) {
-      goHome();
+      sidebar: false,
+      title: this.$store.state.title
     }
   },
   methods: {
@@ -53,10 +37,8 @@ export default {
     login() {
       this.$router.push('/login');
     },
-    logout() {
-      this.$store.dispatch("setIsLoggedIn", false);
-      this.$store.dispatch("setToken", null);
-      this.$store.dispatch("setUser", null);
+    async logout() {
+      await this.$store.dispatch("authLogout");
       this.$router.push('/');
     }
   }
