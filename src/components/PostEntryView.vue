@@ -11,7 +11,7 @@
           <v-text-field v-model="category" label="Category" required></v-text-field>
           <v-text-field v-model="amount" label="Amount" type="number" required></v-text-field>
           <!-- <v-text-field v-model="forUser" placeholder="Expense By"></v-text-field> -->
-          <div v-html="error" class="error" />
+          <Snackbar v-if="message" v-bind:message="message">{{message}}</Snackbar>
         </v-form>
       </v-flex>
     </v-layout>
@@ -20,6 +20,7 @@
 
 
 <script>
+import Snackbar from '@/components/Snackbar.vue';
 import entryService from '@/services/entryService';
 export default {
   data() {
@@ -27,8 +28,11 @@ export default {
       category: "",
       amount: "",
       forUser: "",
-      error: null
+      message: null
     }
+  },
+  components: {
+    Snackbar
   },
   methods: {
     async saveEntry() {
@@ -36,16 +40,19 @@ export default {
         category: this.category,
         amount: this.amount
       };
-      try {
-        const res = await entryService.saveEntry(newPost);
-        console.log(`New post saved: `, res);
-      } catch (err) {
-        this.error = err.response.data;
-        console.log('Error saving new post: ', err);
-      }
+      entryService.saveEntry(newPost)
+        .then((res) => {
+          this.message = `New post saved: `, res;
+          this.$router.push('/home');
+        })
+        .catch((err) => {
+          console.log('Error saving new post: ', err);
+          this.message = err.response.data;
+        });
     }
   }
 }
+
 
 </script>
 
