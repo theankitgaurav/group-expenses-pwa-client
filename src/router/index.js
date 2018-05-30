@@ -35,29 +35,34 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'index'
+      name: 'index',
+      meta: {title: "Group Expenses"},
     },
     {
       path: '/register',
       name: 'register',
+      meta: {title: "Register"},
       component: loadView('RegisterView'),
       beforeEnter: ifNotAuthenticated      
     },
     {
       path: '/login',
       name: 'login',
+      meta: {title: "Login"},
       component: loadView('LoginView'),
       beforeEnter: ifNotAuthenticated
     },
     {
       path: '/home',
       name: 'home',
+      meta: {title: "Group Expenses"},
       component: loadView('HomeView'),
       beforeEnter: ifAuthenticated
     },
     {
       path: '/new-entry',
       name: 'newEntry',
+      meta: {title: "New Entry"},
       component: loadView('PostEntryView'),
       beforeEnter: ifAuthenticated
     }
