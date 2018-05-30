@@ -27,6 +27,9 @@ export default new Vuex.Store({
         authLogout: (state) => {
             state.token = null;
             state.user = null;
+        },
+        setTitle: (state, title) => {
+            state.title = title
         }
     },
     actions: {

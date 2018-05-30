@@ -40,24 +40,28 @@ const router = new Router({
     {
       path: '/register',
       name: 'register',
+      meta: {title: "Register"},
       component: loadView('RegisterView'),
       beforeEnter: ifNotAuthenticated      
     },
     {
       path: '/login',
       name: 'login',
+      meta: {title: "Login"},
       component: loadView('LoginView'),
       beforeEnter: ifNotAuthenticated
     },
     {
       path: '/home',
       name: 'home',
+      meta: {title: "Group Expenses"},
       component: loadView('HomeView'),
       beforeEnter: ifAuthenticated
     },
     {
       path: '/new-entry',
       name: 'newEntry',
+      meta: {title: "New Entry"},
       component: loadView('PostEntryView'),
       beforeEnter: ifAuthenticated
     }

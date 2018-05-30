@@ -23,9 +23,14 @@
 <script>
 export default {
   name: 'app',
-  data () {
-    return {
-      title: this.$store.state.title
+  computed: {
+    title () {
+      return this.$store.state.title
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.$store.commit("setTitle", to.meta.title);
     }
   },
   methods: {
