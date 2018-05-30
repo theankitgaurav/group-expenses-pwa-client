@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-text style="height: 300px;" class="grey lighten-5">
+    <v-card-text style="height: 300px;padding:0px;" class="grey lighten-5">
       <EntryList/>
     </v-card-text>
     <v-card-text style="height: 50px; position: relative">

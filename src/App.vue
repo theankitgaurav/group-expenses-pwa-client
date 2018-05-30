@@ -2,7 +2,7 @@
   <div id="app">
     <v-layout row wrap>
       <v-flex xs12 sm12 md6>
-        <v-toolbar>
+        <v-toolbar class="elevation-5">
           <v-toolbar-title @click="goHome" >{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>

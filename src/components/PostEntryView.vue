@@ -1,18 +1,18 @@
 <template>
-  <transition  name="bounce">
-    <v-layout row>
+  <transition name="bounce">
+    <v-layout row style="padding: 16px;">
       <v-flex md6 offset-md3>
-        <v-toolbar>
-          <strong>New Entry</strong>
-          <v-spacer></v-spacer>
-          <v-btn @click="saveEntry">Save</v-btn>
-        </v-toolbar>
         <v-form>
           <v-text-field v-model="category" label="Category" required></v-text-field>
           <v-text-field v-model="amount" label="Amount" type="number" required></v-text-field>
           <!-- <v-text-field v-model="forUser" placeholder="Expense By"></v-text-field> -->
           <Snackbar v-if="message" v-bind:message="message">{{message}}</Snackbar>
         </v-form>
+        <v-card-text style="height: 50px; position: relative">
+          <v-btn @click.native="saveEntry" absolute dark fab top right color="blue">
+            <v-icon>done</v-icon>
+          </v-btn>
+        </v-card-text>
       </v-flex>
     </v-layout>
   </transition>
