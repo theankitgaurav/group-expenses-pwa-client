@@ -3,7 +3,6 @@
     <v-layout row wrap>
       <v-flex xs12 sm12 md6>
         <v-toolbar>
-          <v-toolbar-side-icon @click="sidebar = !sidebar"></v-toolbar-side-icon>
           <v-toolbar-title @click="goHome" >{{title}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
@@ -26,7 +25,6 @@ export default {
   name: 'app',
   data () {
     return {
-      sidebar: false,
       title: this.$store.state.title
     }
   },

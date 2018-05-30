@@ -1,11 +1,10 @@
 <template>
   <v-card>
     <v-card-text style="height: 300px;" class="grey lighten-5">
-      <EntryList>
-      </EntryList>
+      <EntryList/>
     </v-card-text>
-    <v-card-text style="height: 100px; position: relative">
-      <v-btn @click="addExpense" absolute dark fab top right color="pink">
+    <v-card-text style="height: 50px; position: relative">
+      <v-btn @click="addExpense" absolute dark fab top right color="blue">
         <v-icon>add</v-icon>
       </v-btn>
     </v-card-text>
