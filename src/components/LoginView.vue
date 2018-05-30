@@ -3,7 +3,6 @@
     <v-layout row wrap justify-center>
       <v-flex xs12 sm6>
         <v-card>
-          <v-toolbar color="primary">Login</v-toolbar>
           <v-form>
             <v-text-field v-model="username" type="text" name="username" placeholder="username" required />
             <v-text-field v-model="password" type="password" name="password" placeholder="password" />

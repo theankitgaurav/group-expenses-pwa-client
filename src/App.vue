@@ -2,20 +2,23 @@
   <div id="app">
     <v-layout row wrap>
       <v-flex xs12 sm12 md6>
-        <v-toolbar class="elevation-5">
-          <v-toolbar-title @click="goHome" >{{title}}</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
-          <a v-else @click="logout">Logout</a>
-        </v-toolbar>
-        <main>
-          <router-view></router-view>
-        </main>
-        <footer></footer>
+        <v-card>
+          <v-toolbar class="elevation-5">
+            <v-toolbar-title @click="goHome">{{title}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
+            <a v-else @click="logout">Logout</a>
+          </v-toolbar>
+          <main>
+            <router-view></router-view>
+          </main>
+          <footer></footer>
+        </v-card>
       </v-flex>
     </v-layout>
   </div>
 </template>
+
 
 
 
@@ -49,5 +52,8 @@ export default {
 </script>
 
 <style>
-
+/* @media only screen and (max-width: 599px) */
+.container {
+    padding: 0px;
+}
 </style>
