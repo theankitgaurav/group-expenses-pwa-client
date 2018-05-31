@@ -1,23 +1,23 @@
 <template>
-  <div id="app">
-    <v-layout row wrap>
-      <v-flex xs12 sm12 md6>
-        <v-card>
-          <v-toolbar class="elevation-5">
-            <v-toolbar-title @click="goHome">{{title}}</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
-            <a v-else @click="logout">Logout</a>
-          </v-toolbar>
-          <main>
-            <router-view></router-view>
-          </main>
-          <footer></footer>
-        </v-card>
-      </v-flex>
-    </v-layout>
+  <div class="page-container" id="app">
+    <md-app>
+      <md-app-toolbar class="md-primary" @click="goHome">
+        <span class="md-title">{{title}}</span>
+        <span>
+          <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
+          <a v-else @click="logout">Logout</a>
+        </span>
+      </md-app-toolbar>
+      <md-app-content>
+        <main>
+          <router-view></router-view>
+        </main>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
+
+
 
 
 

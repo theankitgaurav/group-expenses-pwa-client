@@ -1,20 +1,30 @@
 <template>
-  <v-container fluid>
-    <v-layout row wrap justify-center>
-      <v-flex xs12 sm6>
-        <v-card>
-          <v-form>
-            <v-text-field v-model="username" type="text" name="username" placeholder="username" required />
-            <v-text-field v-model="password" type="password" name="password" placeholder="password" />
-            <v-btn round @click="login">Login</v-btn>
-            <div v-html="error" class="error" />
-          </v-form>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+<div>
+  <form novalidate class="md-layout" @submit.prevent="login">
+    <md-card class="md-layout-item md-size-50 md-small-size-100">
+      <md-card-content>
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item md-small-size-100">
+            <md-field>
+              <label for="username">Username/Email</label>
+              <md-input v-model="username" type="text" name="username" required :disabled="sending"/>
+            </md-field>
+            <md-field>
+              <label for="username">Password</label>
+              <md-input v-model="password" type="password" name="password" required :disabled="sending"/>
+            </md-field>
+          </div>
+        </div>
+      </md-card-content>
+      <md-progress-bar md-mode="indeterminate" v-if="sending"></md-progress-bar>
+      <md-card-actions>
+        <md-button type="submit" class="md-primary" :disabled="sending">Proceed</md-button>
+      </md-card-actions>
+    </md-card>
+    <md-snackbar md-position="center" :md-active.sync="error" class="error">{{errorMsg}}</md-snackbar>
+  </form>
+</div>
 </template>
-
 
 <script>
 export default {
@@ -22,19 +32,26 @@ export default {
     return {
       username: "",
       password: "",
-      error: null
+      error: false,
+      errorMsg: null,
+      sending: false
     };
   },
   methods: {
-    async login() {
-      const { username, password } = this;
-      try {
-        await this.$store.dispatch("authRequest", { username, password });
-        this.$router.push('/home');
-      } catch (err) {
+    login() {
+      const self = this;
+      self.sending = true;
+      const { username, password } = self;
+      self.$store.dispatch("authRequest", { username, password })
+      .then(function (res) {
+        self.$router.push('/home');
+      })
+      .catch (function (err) {
+        self.sending = false;
         console.log(`Error during auth`, err);
-        this.error = `Error during auth`;
-      }
+        self.error = true;
+        self.errorMsg = `Error during login. Try again.`;
+      })
     }
   }
 };
@@ -44,5 +61,11 @@ export default {
 <style scoped>
 .error {
   color: red;
+}
+.md-progress-bar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
 }
 </style>

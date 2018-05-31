@@ -4,13 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import {sync} from 'vuex-router-sync'
-import 'vuetify/dist/vuetify.min.css'
-import Vuetify from 'vuetify'
 import store from '@/store/store'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
 
+Vue.use(VueMaterial)
 Vue.config.productionTip = false;
 sync(store, router);
-Vue.use(Vuetify);
 
 /* eslint-disable no-new */
 new Vue({
