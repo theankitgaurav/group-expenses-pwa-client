@@ -1,7 +1,7 @@
 <template>
   <div class="page-container" id="app" style="height:100vh">
     <md-app>
-      <md-app-toolbar class="md-accent" @click="goHome">
+      <md-app-toolbar class="md-primary" @click="goHome">
         <md-button class="md-title">{{title}}</md-button>
         <div class="md-toolbar-section-end" v-show="this.$store.getters.isAuthenticated">
           <md-menu md-direction="bottom-start" >

@@ -7,6 +7,7 @@ import {sync} from 'vuex-router-sync'
 import store from '@/store/store'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
 
 Vue.use(VueMaterial)
 Vue.config.productionTip = false;
