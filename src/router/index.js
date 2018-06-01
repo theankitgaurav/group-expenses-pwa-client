@@ -38,6 +38,7 @@ const router = new Router({
       name: 'index',
       component: loadView('LoginView'),
       meta: {title: "Group Expenses"},
+      beforeEnter: ifNotAuthenticated      
     },
     {
       path: '/register',
