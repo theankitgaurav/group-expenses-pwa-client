@@ -24,7 +24,7 @@ export default {
           loading: true
       };
   },
-  async created() {
+  async mounted() {
     this.refreshHome();
   },
   methods: {

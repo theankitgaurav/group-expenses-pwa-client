@@ -10,7 +10,9 @@ export default new Vuex.Store({
     state: {
         token: localStorage.getItem('user-token') || null,
         user: JSON.parse(localStorage.getItem('user')) || null,
-        title: `Group Expenses`
+        title: `Group Expenses`,
+        groupsList: [],
+        entriesList: []
     },
     getters: {
         isAuthenticated: state => !!state.token
