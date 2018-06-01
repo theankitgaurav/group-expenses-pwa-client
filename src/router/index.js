@@ -36,6 +36,7 @@ const router = new Router({
     {
       path: '/',
       name: 'index',
+      component: loadView('LoginView'),
       meta: {title: "Group Expenses"},
     },
     {

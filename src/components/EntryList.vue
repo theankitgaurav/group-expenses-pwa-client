@@ -1,16 +1,19 @@
 <template>
-  <v-list two-line>
-    <template v-for="item in entries">
-      <v-list-tile class="v-list-tile" :key="item.category" @click="openEntry(item._id)" ripple>
-        <v-list-tile-content>
-          <v-list-tile-title v-html="'Rs. ' + item.amount + ' for ' + item.category"></v-list-tile-title>
-          <v-list-tile-sub-title v-html="'Paid by: ' + item.forUser + ' in ' + item.group"></v-list-tile-sub-title>
-        </v-list-tile-content>
-      </v-list-tile>
-    </template>
-    <v-progress-circular v-show="loading" :indeterminate="true"></v-progress-circular>
-  </v-list>
+  <div>
+    <md-list class="md-double-line" v-for="item in entries" :key="item.category">
+      <md-list-item @click="openEntry(item._id)">
+        <md-icon class="md-primary">phone</md-icon>
+        <div class="md-list-item-text">
+          <span>Rs. {{item.amount}} for {{item.category}}</span>
+          <span>Paid by: {{item.forUser}} in {{item.group}}</span>
+        </div>
+      </md-list-item>
+      <md-divider></md-divider>
+    </md-list>
+  </div>
 </template>
+
+
 
 <script>
 import entryService from "@/services/entryService";
@@ -42,7 +45,4 @@ export default {
 </script>
 
 <style scoped>
-.v-list-tile {
-  border-bottom: 1px solid lightblue;
-}
 </style>

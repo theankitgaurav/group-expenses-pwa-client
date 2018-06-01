@@ -1,23 +1,12 @@
 <template>
-  <v-container>
-    <v-layout row>
-      <v-flex xs12 sm6>
-        <v-card>
-          <v-card-text style="height: 300px;">
-            <EntryList/>
-          </v-card-text>
-          <v-card-text style="height: 50px; position: relative">
-            <v-btn @click="addExpense" absolute dark fab top right color="blue">
-              <v-icon>add</v-icon>
-            </v-btn>
-          </v-card-text>
-        </v-card>
-      </v-flex>
-    </v-layout>
-  </v-container>
+  <div>
+    <EntryList/>
+    <span class="fill-space"></span>
+    <md-button @click="addExpense" class="md-fab md-primary md-fab-bottom-right ">
+      <md-icon>add</md-icon>
+    </md-button>
+  </div>
 </template>
-
-
 
 <script>
 import EntryList from '@/components/EntryList.vue';
@@ -32,3 +21,11 @@ export default {
   }
 };
 </script>
+
+<style>
+.fill-space {
+  /* // This fills the remaining space, by using flexbox.
+  // Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+</style>

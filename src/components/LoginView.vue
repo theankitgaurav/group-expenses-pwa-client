@@ -18,7 +18,8 @@
       </md-card-content>
       <md-progress-bar md-mode="indeterminate" v-if="sending"></md-progress-bar>
       <md-card-actions>
-        <md-button type="submit" class="md-primary" :disabled="sending">Proceed</md-button>
+        <md-button to="register">Register</md-button>
+        <md-button type="submit" class="md-primary md-raised" :disabled="sending" >Login</md-button>
       </md-card-actions>
     </md-card>
     <md-snackbar md-position="center" :md-active.sync="error" class="error">{{errorMsg}}</md-snackbar>

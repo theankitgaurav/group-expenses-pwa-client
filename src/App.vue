@@ -1,27 +1,25 @@
 <template>
-  <div class="page-container" id="app">
+  <div class="page-container" id="app" style="height:100vh">
     <md-app>
-      <md-app-toolbar class="md-primary" @click="goHome">
-        <span class="md-title">{{title}}</span>
-        <span>
-          <a v-if="!this.$store.getters.isAuthenticated" @click="login">Login</a>
-          <a v-else @click="logout">Logout</a>
-        </span>
+      <md-app-toolbar class="md-accent" @click="goHome">
+        <md-button class="md-title">{{title}}</md-button>
+        <div class="md-toolbar-section-end" v-show="this.$store.getters.isAuthenticated">
+          <md-menu md-direction="bottom-start" >
+            <md-button class="md-icon-button" md-menu-trigger>
+              <md-icon>more_vert</md-icon>
+            </md-button>
+            <md-menu-content>
+              <md-menu-item @click="logout">Logout</md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
       </md-app-toolbar>
       <md-app-content>
-        <main>
           <router-view></router-view>
-        </main>
       </md-app-content>
     </md-app>
   </div>
 </template>
-
-
-
-
-
-
 
 <script>
 export default {
@@ -52,8 +50,4 @@ export default {
 </script>
 
 <style>
-/* @media only screen and (max-width: 599px) */
-.container {
-    padding: 0px;
-}
 </style>
