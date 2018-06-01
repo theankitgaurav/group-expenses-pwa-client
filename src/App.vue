@@ -1,10 +1,10 @@
 <template>
-  <div class="page-container" id="app" style="height:100vh">
+  <div class="page-container" id="app">
     <md-app>
       <md-app-toolbar class="md-primary" @click="goHome">
         <md-button class="md-title">{{title}}</md-button>
         <div class="md-toolbar-section-end" v-show="this.$store.getters.isAuthenticated">
-          <md-menu md-direction="bottom-start" >
+          <md-menu md-direction="bottom-start">
             <md-button class="md-icon-button" md-menu-trigger>
               <md-icon>more_vert</md-icon>
             </md-button>
@@ -15,11 +15,16 @@
         </div>
       </md-app-toolbar>
       <md-app-content>
-          <router-view></router-view>
+        <md-tabs md-sync-route md-alignment="fixed" v-show="this.$store.getters.isAuthenticated">
+          <md-tab id="tab-home" md-label="All" to="home" />
+          <md-tab id="tab-pages" md-label="Groups" to="groups" />
+        </md-tabs>
+        <router-view></router-view>
       </md-app-content>
     </md-app>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -49,5 +54,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+
 </style>

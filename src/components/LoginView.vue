@@ -18,7 +18,7 @@
       </md-card-content>
       <md-progress-bar md-mode="indeterminate" v-if="sending"></md-progress-bar>
       <md-card-actions>
-        <md-button to="register">Register</md-button>
+        <md-button to="register" :disabled="sending">Register</md-button>
         <md-button type="submit" class="md-primary md-raised" :disabled="sending" >Login</md-button>
       </md-card-actions>
     </md-card>

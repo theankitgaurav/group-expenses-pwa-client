@@ -66,6 +66,13 @@ const router = new Router({
       meta: {title: "New Entry"},
       component: loadView('PostEntryView'),
       beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/groups',
+      name: 'groups',
+      meta: {title: 'Group Expenses'},
+      component: loadView('GroupsView'),
+      beforeEnter: ifAuthenticated
     }
   ]
 });
