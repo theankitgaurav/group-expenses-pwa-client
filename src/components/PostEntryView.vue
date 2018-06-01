@@ -1,20 +1,56 @@
 <template>
   <transition name="bounce">
-    <v-layout row style="padding: 16px;">
-      <v-flex md6 offset-md3>
-        <v-form>
-          <v-text-field v-model="category" label="Category" required></v-text-field>
-          <v-text-field v-model="amount" label="Amount" type="number" required></v-text-field>
-          <!-- <v-text-field v-model="forUser" placeholder="Expense By"></v-text-field> -->
-          <Snackbar v-if="message" v-bind:message="message">{{message}}</Snackbar>
-        </v-form>
-        <v-card-text style="height: 50px; position: relative">
-          <v-btn @click.native="saveEntry" absolute dark fab top right color="blue">
-            <v-icon>done</v-icon>
-          </v-btn>
-        </v-card-text>
-      </v-flex>
-    </v-layout>
+    <form novalidate class="md-layout" @submit.prevent="saveEntry">
+      <div class="row-1">
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item md-size-75">
+            <md-autocomplete v-model="expenseCategory" :md-options="categoryList">
+              <label>Category</label>
+            </md-autocomplete>
+          </div>
+          <div class="md-layout-item md-size-25">
+            <md-field>
+              <label>Amount</label>
+              <span class="md-prefix">₹</span>
+              <md-input v-model="expenseAmount" type="number"></md-input>
+            </md-field>
+          </div>
+        </div>
+      </div>
+      <div class="row-2">
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item">
+            <md-field>
+              <label>Details</label>
+              <md-textarea v-model="expenseDetails"></md-textarea>
+            </md-field>
+          </div>
+        </div>
+      </div>
+      <div class="row-3">
+        <div class="md-layout md-gutter">
+          <div class="md-layout-item md-size-33">
+            <md-field>
+              <md-icon>perm_identity</md-icon>
+              <label>Paid By</label>
+              <md-input v-model="expenseBy" />
+            </md-field>
+          </div>
+          <div class="md-layout-item md-size-33">
+            <md-datepicker v-model="expenseOn" md-immediately :md-open-on-focus="false" md-clearable="false">
+              <label>Paid On</label>
+            </md-datepicker>
+          </div>
+          <div class="md-layout-item md-size-33">
+            <md-field>
+              <md-icon>group</md-icon>
+              <label>Group</label>
+              <md-input v-model="expenseGroup"></md-input>
+            </md-field>
+          </div>
+        </div>
+      </div>
+    </form>
   </transition>
 </template>
 
@@ -25,10 +61,15 @@ import entryService from '@/services/entryService';
 export default {
   data() {
     return {
-      category: "",
-      amount: "",
-      forUser: "",
-      message: null
+      expenseCategory: "",
+      expenseAmount: "",
+      expenseBy: "",
+      expenseOn: new Date,
+      expenseGroup: "",
+      expenseDetails: "",
+      message: null,
+      groupMemberList: ['Manish', 'Surit', 'Ankit'],
+      categoryList: ['Veggies', 'Flour', 'Rice', 'Stationary', 'Detergent']
     }
   },
   components: {
