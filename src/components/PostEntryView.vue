@@ -10,6 +10,7 @@
           </div>
           <div class="md-layout-item md-size-25">
             <md-field>
+              <md-icon>money</md-icon>
               <label>Amount</label>
               <span class="md-prefix">₹</span>
               <md-input v-model="expenseAmount" type="number"></md-input>
@@ -37,7 +38,7 @@
             </md-field>
           </div>
           <div class="md-layout-item md-size-33">
-            <md-datepicker v-model="expenseOn" md-immediately :md-open-on-focus="false" md-clearable="false">
+            <md-datepicker v-model="expenseOn" md-immediately>
               <label>Paid On</label>
             </md-datepicker>
           </div>
@@ -64,7 +65,7 @@ export default {
       expenseCategory: "",
       expenseAmount: "",
       expenseBy: "",
-      expenseOn: new Date,
+      expenseOn: null,
       expenseGroup: "",
       expenseDetails: "",
       message: null,

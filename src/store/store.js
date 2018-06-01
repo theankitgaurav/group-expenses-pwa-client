@@ -12,7 +12,9 @@ export default new Vuex.Store({
         user: JSON.parse(localStorage.getItem('user')) || null,
         title: `Group Expenses`,
         groupsList: [],
-        entriesList: []
+        entriesList: [],
+        enableNavigationTabs: false,
+        backButtonRequired: false
     },
     getters: {
         isAuthenticated: state => !!state.token
@@ -31,7 +33,13 @@ export default new Vuex.Store({
             state.user = null;
         },
         setTitle: (state, title) => {
-            state.title = title
+            state.title = title;
+        },
+        enableNavigationTabs: (state, value) => {
+            state.enableNavigationTabs = value;
+        },
+        backButtonRequired: (state, value) => {
+            state.backButtonRequired = value;
         }
     },
     actions: {
