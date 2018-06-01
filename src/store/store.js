@@ -12,9 +12,11 @@ export default new Vuex.Store({
         user: JSON.parse(localStorage.getItem('user')) || null,
         title: `Group Expenses`,
         groupsList: [],
-        entriesList: [],
-        enableNavigationTabs: false,
-        backButtonRequired: false
+        entriesList:  [],
+        appConfig: {
+            enableNavigationTabs: false,
+            backButtonRequired: false,
+        }
     },
     getters: {
         isAuthenticated: state => !!state.token
@@ -36,10 +38,10 @@ export default new Vuex.Store({
             state.title = title;
         },
         enableNavigationTabs: (state, value) => {
-            state.enableNavigationTabs = value;
+            state.appConfig.enableNavigationTabs = value;
         },
         backButtonRequired: (state, value) => {
-            state.backButtonRequired = value;
+            state.appConfig.backButtonRequired = value;
         }
     },
     actions: {
@@ -55,7 +57,7 @@ export default new Vuex.Store({
                 commit("authError");
                 await localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
                 await localStorage.removeItem('user');
-                throw new Error(err);
+                throw err;
             }
         },
         async authLogout ({commit}) {
