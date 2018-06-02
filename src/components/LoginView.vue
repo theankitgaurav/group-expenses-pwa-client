@@ -7,7 +7,7 @@
           <div class="md-layout-item md-small-size-100">
             <md-field>
               <label for="username">Username/Email</label>
-              <md-input v-model="username" type="text" name="username" required :disabled="sending"/>
+              <md-input v-focus v-model="username" type="text" name="username" required :disabled="sending"/>
             </md-field>
             <md-field>
               <label for="username">Password</label>
@@ -37,6 +37,15 @@ export default {
       errorMsg: null,
       sending: false
     };
+  },
+  directives: {
+    focus: {
+      // When the bound element is inserted into the DOM...
+      inserted: function (el) {
+        // Focus the element
+        el.focus()
+      }
+    }
   },
   methods: {
     login() {

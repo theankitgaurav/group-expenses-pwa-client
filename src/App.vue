@@ -38,15 +38,14 @@
 export default {
   name: 'app',
   data() {
-    return {
-    };
+    return {};
   },
   computed: {
     title() {
       return this.$store.state.title
     },
-    username () {
-      return this.$store.state.user ? this.$store.state.user.username: ""; 
+    username() {
+      return this.$store.state.user ? this.$store.state.user.username : "";
     }
   },
   watch: {
@@ -59,9 +58,10 @@ export default {
   },
   methods: {
     goBack() {
-      window.history.length > 1 ?
-        this.$router.go(-1) :
-        this.$router.push('/home')
+      this.$router.push('/home');
+      // window.history.length > 1 ?
+      //   this.$router.go(-1) :
+      //   this.$router.push('/home')
     },
     goHome() {
       this.$router.replace('/home');
@@ -73,7 +73,7 @@ export default {
       await this.$store.dispatch("authLogout");
       this.$router.push('/');
     },
-    toggleBackButton (route) {
+    toggleBackButton(route) {
       const routeName = route.name;
       if (['index', 'login', 'register', 'home', 'groups'].indexOf(routeName) != -1) {
         this.$store.commit("backButtonRequired", false);
@@ -81,7 +81,7 @@ export default {
         this.$store.commit("backButtonRequired", true);
       }
     },
-    toggleNavigationTabs (route) {
+    toggleNavigationTabs(route) {
       const routeName = route.name;
       if (['home', 'groups'].indexOf(routeName) != -1) {
         this.$store.commit("enableNavigationTabs", true);
@@ -91,7 +91,6 @@ export default {
     }
   }
 }
-
 </script>
 
 <style scoped>

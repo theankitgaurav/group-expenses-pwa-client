@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
 import authenticateService from "@/services/authenticateService";
+import entryService from "@/services/entryService";
 import axios from 'axios';
 
 Vue.use(Vuex);
@@ -11,8 +12,8 @@ export default new Vuex.Store({
         token: localStorage.getItem('user-token') || null,
         user: JSON.parse(localStorage.getItem('user')) || null,
         title: `Group Expenses`,
-        groupsList: [],
-        entriesList:  [],
+        groupsList: JSON.parse(localStorage.getItem('groupsList')) || [],
+        entriesList: JSON.parse(localStorage.getItem('entriesList')) || [],
         appConfig: {
             enableNavigationTabs: false,
             backButtonRequired: false,
@@ -42,6 +43,12 @@ export default new Vuex.Store({
         },
         backButtonRequired: (state, value) => {
             state.appConfig.backButtonRequired = value;
+        },
+        setEntriesList: (state, list) => {
+            state.entriesList = list;
+        },
+        setGroupsList: (state, list) => {
+            state.groupsList = list;
         }
     },
     actions: {
@@ -65,6 +72,18 @@ export default new Vuex.Store({
             await localStorage.removeItem('user-token');
             await localStorage.removeItem('user');
             delete axios.defaults.headers.common['Authorization'];
+        },
+        async setEntriesList ({commit}) {
+            entryService.getEntries()
+                .then((res)=>{
+                    const listOfEntries = res.response.data;
+                    commit('setEntriesList', listOfEntries);
+                    localStorage.setItem('entriesList', JSON.stringify(listOfEntries));
+                })
+                .catch((err)=>{
+                    console.error(err);
+                    throw err;
+                })
         }
     }
 });

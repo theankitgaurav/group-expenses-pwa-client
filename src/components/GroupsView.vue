@@ -15,11 +15,7 @@
 </template>
 
 <script>
-import EntryList from '@/components/EntryList.vue';
 export default {
-  components: {
-    EntryList
-  },
   methods: {
     addGroup() {
       this.$router.push("/new-entry");
