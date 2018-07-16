@@ -52,11 +52,12 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async authRequest ({commit}, { username, password }) {
+        async authRequest ({commit}, { email, password }) {
             try {
-                const res = await authenticateService.login({ username, password });
-                const token = res.data.token;
-                const user = res.data.user;
+                const res = await authenticateService.login({ email, password });
+                console.log(res)
+                const token = res.data.data.token;
+                const user = res.data.data.user;
                 commit("authSuccess", {token, user});
                 await localStorage.setItem('user-token', token); // store the token in localstorage
                 await localStorage.setItem('user', JSON.stringify(user));
@@ -75,15 +76,21 @@ export default new Vuex.Store({
         },
         async setEntriesList ({commit}) {
             entryService.getEntries()
-                .then((res)=>{
-                    const listOfEntries = res.response.data;
+            .then((res)=>{
+                console.log('Entries: ', res)
+                const listOfEntries = res.response.data.data;
+                if (listOfEntries.length != JSON.parse(localStorage.getItem('entriesList')).length) {
+                    console.log('Replacing stale local data with server data');
                     commit('setEntriesList', listOfEntries);
                     localStorage.setItem('entriesList', JSON.stringify(listOfEntries));
-                })
-                .catch((err)=>{
-                    console.error(err);
-                    throw err;
-                })
+                } else {
+                    console.log('Data in sync with server');
+                }
+            })
+            .catch((err)=>{
+                console.error('Error while performing setEntriesList: ', err);
+                throw err;
+            })
         }
     }
-});
+}); 

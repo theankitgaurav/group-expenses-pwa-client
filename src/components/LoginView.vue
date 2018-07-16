@@ -6,11 +6,11 @@
         <div class="md-layout md-gutter">
           <div class="md-layout-item md-small-size-100">
             <md-field>
-              <label for="username">Username/Email</label>
-              <md-input v-focus v-model="username" type="text" name="username" required :disabled="sending"/>
+              <label for="email">email/Email</label>
+              <md-input v-focus v-model="email" type="text" name="email" required :disabled="sending"/>
             </md-field>
             <md-field>
-              <label for="username">Password</label>
+              <label for="password">Password</label>
               <md-input v-model="password" type="password" name="password" required :disabled="sending"/>
             </md-field>
           </div>
@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
       error: false,
       errorMsg: null,
@@ -51,8 +51,8 @@ export default {
     login() {
       const self = this;
       self.sending = true;
-      const { username, password } = self;
-      self.$store.dispatch("authRequest", { username, password })
+      const { email, password } = self;
+      self.$store.dispatch("authRequest", { email, password })
       .then(function (res) {
         self.$router.push('/home');
       })

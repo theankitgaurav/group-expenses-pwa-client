@@ -98,7 +98,7 @@ export default {
     validateExpense () {
       if(!this.form.expenseCategory) this.form.expenseCategory = 'Others';
       if(!this.form.expenseAmount) this.form.expenseAmount = 10;
-      if(!this.form.expenseBy) this.form.expenseBy = this.$store.state.user.username;
+      if(!this.form.expenseBy) this.form.expenseBy = this.$store.state.user.email;
       if(!this.form.expenseOn) this.form.expenseOn = new Date;
       if(!this.form.expenseGroup) this.form.expenseGroup = 'Personal';
     }

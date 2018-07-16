@@ -5,8 +5,8 @@
         <md-list-item @click="openEntry(item._id)">
           <md-icon class="md-primary">phone</md-icon>
           <div class="md-list-item-text">
-            <span>Rs. {{item.amount}} for {{item.category}}</span>
-            <span>Paid by: {{item.forUser}} in {{item.group}}</span>
+            <span>Rs. {{item.expenseAmount}} for {{item.expenseCategory}}</span>
+            <span>Paid by: {{item.expenseBy}} in {{item.expenseGroup}}</span>
           </div>
         </md-list-item>
         <md-divider></md-divider>
