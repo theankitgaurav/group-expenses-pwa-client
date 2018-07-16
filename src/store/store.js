@@ -3,8 +3,19 @@ import Vuex from 'vuex';
 import authenticateService from "@/services/authenticateService";
 import entryService from "@/services/entryService";
 import axios from 'axios';
+import _ from 'lodash';
 
 Vue.use(Vuex);
+
+async function isLocalDataStale (data, localStorageItemName) {
+    // Return true if item doesn't exists in localStorage
+    if (!localStorage.getItem(localStorageItemName)) {
+        return true;
+    }
+    // Return the deep-comparsion of local item and input data
+    const localData = JSON.parse(localStorage.getItem(localStorageItemName))
+    return _.isEqual(data, localData);
+}
 
 export default new Vuex.Store({
     strict: true,
@@ -78,8 +89,8 @@ export default new Vuex.Store({
             entryService.getEntries()
             .then((res)=>{
                 console.log('Entries: ', res)
-                const listOfEntries = res.response.data.data;
-                if (listOfEntries.length != JSON.parse(localStorage.getItem('entriesList')).length) {
+                const listOfEntries = res.data.data;
+                if (isLocalDataStale(listOfEntries, 'entriesList')) {
                     console.log('Replacing stale local data with server data');
                     commit('setEntriesList', listOfEntries);
                     localStorage.setItem('entriesList', JSON.stringify(listOfEntries));

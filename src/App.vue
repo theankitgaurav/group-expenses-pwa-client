@@ -75,19 +75,19 @@ export default {
     },
     toggleBackButton(route) {
       const routeName = route.name;
-      if (['index', 'login', 'register', 'home', 'groups'].indexOf(routeName) != -1) {
-        this.$store.commit("backButtonRequired", false);
-      } else {
-        this.$store.commit("backButtonRequired", true);
-      }
+      this.$store.commit("backButtonRequired", this.isBackButtonRequired(routeName));
+    },
+    isBackButtonRequired(routeName) {
+      const arrayOfViewsWithoutBackButton = ['index', 'login', 'register', 'home', 'groups'];
+      return !arrayOfViewsWithoutBackButton.includes(routeName);
     },
     toggleNavigationTabs(route) {
       const routeName = route.name;
-      if (['home', 'groups'].indexOf(routeName) != -1) {
-        this.$store.commit("enableNavigationTabs", true);
-      } else {
-        this.$store.commit("enableNavigationTabs", false);
-      }
+      this.$store.commit("enableNavigationTabs", this.isNavigationTabRequired(routeName));
+    },
+    isNavigationTabRequired(routeName) {
+      const arrayOfViewsWithoutNavTabs = ['home', 'groups'];
+      return arrayOfViewsWithoutNavTabs.includes(routeName);
     }
   }
 }

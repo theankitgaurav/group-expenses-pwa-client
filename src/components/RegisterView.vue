@@ -6,11 +6,15 @@
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-small-size-100">
               <md-field>
-                <label for="username">Username/Email</label>
-                <md-input v-model="username" type="text" name="username" required :disabled="sending" />
+                <label for="name">Name</label>
+                <md-input v-model="name" type="text" name="name" required :disabled="sending" />
               </md-field>
               <md-field>
-                <label for="username">Password</label>
+                <label for="email">Email</label>
+                <md-input v-model="email" type="text" name="email" required :disabled="sending" />
+              </md-field>
+              <md-field>
+                <label for="password">Password</label>
                 <md-input v-model="password" type="password" name="password" required :disabled="sending" />
               </md-field>
             </div>
@@ -33,7 +37,8 @@ import authenticateService from '@/services/authenticateService';
 export default {
   data() {
     return {
-      username: "",
+      name: "",
+      email: "",
       password: "",
       error: false,
       errorMsg: null,
@@ -44,7 +49,8 @@ export default {
     register() {
       this.sending = true;
       authenticateService.register({
-          username: this.username,
+          name: this.name,
+          email: this.email,
           password: this.password
         })
         .then((res) => {
