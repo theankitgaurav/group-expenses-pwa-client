@@ -46,7 +46,9 @@
               <md-field>
                 <md-icon>group</md-icon>
                 <label>Group</label>
-                <md-input v-model="form.expenseGroup"></md-input>
+                <md-select v-for="group in groups" :key="group.id" v-model="form.expenseGroup" name="group" id="group">
+                  <md-option :value="group.id">{{group.name}}</md-option>
+                </md-select>
               </md-field>
             </div>
           </div>
@@ -65,6 +67,7 @@ import entryService from '@/services/entryService';
 export default {
   data() {
     return {
+      groups: [{id:26, name: 'Personal'}, {id: 2, name: 'hhdi'}],
       form: {
         expenseCategory: "",
         expenseAmount: "",
@@ -98,7 +101,7 @@ export default {
     validateExpense () {
       if(!this.form.expenseCategory) this.form.expenseCategory = 'Others';
       if(!this.form.expenseAmount) this.form.expenseAmount = 10;
-      if(!this.form.expenseBy) this.form.expenseBy = this.$store.state.user.email;
+      if(!this.form.expenseBy) this.form.expenseBy = this.$store.state.user.id;
       if(!this.form.expenseOn) this.form.expenseOn = new Date;
       if(!this.form.expenseGroup) this.form.expenseGroup = 'Personal';
     }

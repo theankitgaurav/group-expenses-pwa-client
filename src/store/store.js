@@ -7,6 +7,14 @@ import _ from 'lodash';
 
 Vue.use(Vuex);
 
+/**
+ * FIXME: Lodash isEqual() method is deep comparing objects
+ * resulting is incorrect behavior
+ *
+ * @param {Object} data Object that needs to be comapred to its counterpart in localstorage
+ * @param {String} localStorageItemName Key of the item in localstorage 
+ * @returns
+ */
 async function isLocalDataStale (data, localStorageItemName) {
     // Return true if item doesn't exists in localStorage
     if (!localStorage.getItem(localStorageItemName)) {

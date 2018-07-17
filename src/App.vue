@@ -45,7 +45,7 @@ export default {
       return this.$store.state.title
     },
     username() {
-      return this.$store.state.user ? this.$store.state.user.username : "";
+      return this.$store.state.user ? this.$store.state.user.name : "";
     }
   },
   watch: {
