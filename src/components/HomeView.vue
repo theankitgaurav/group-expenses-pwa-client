@@ -1,12 +1,12 @@
 <template>
   <div>
     <md-content v-if="entries.length > 0">
-      <md-list class="md-double-line" v-for="item in entries" :key="item.category">
-        <md-list-item @click="openEntry(item._id)">
+      <md-list class="md-double-line" v-for="item in entries" :key="item.id">
+        <md-list-item @click="openEntry(item.id)">
           <md-icon class="md-primary">phone</md-icon>
           <div class="md-list-item-text">
-            <span>Rs. {{item.expenseAmount}} for {{item.expenseCategory}}</span>
-            <span>Paid by: {{item.expenseBy}} in {{item.expenseGroup}}</span>
+            <span>Rs. {{item.amount}} for {{item.category}}</span>
+            <span>Paid by: {{item.paidBy}} in {{item.groupName}}</span>
           </div>
         </md-list-item>
         <md-divider></md-divider>
@@ -27,6 +27,7 @@
 
 
 <script>
+import * as _ from 'lodash';
 export default {
   data () {
       return {
@@ -56,7 +57,7 @@ export default {
         })
     },
     async openEntry(entryId) {
-      console.log(entryId);
+      alert(JSON.stringify(_.find(this.entries, {id: entryId})));
     }
   }
 };
