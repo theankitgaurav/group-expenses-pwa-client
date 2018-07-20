@@ -11,7 +11,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error);
 });
-let entries = {data: []};
+
 export default {
   
   async getEntries() {
