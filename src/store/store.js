@@ -28,8 +28,8 @@ async function isLocalDataStale (data, localStorageItemName) {
 export default new Vuex.Store({
     strict: true,
     state: {
-        token: localStorage.getItem('user-token') || null,
-        user: JSON.parse(localStorage.getItem('user')) || null,
+        token: localStorage.getItem('user-token'),
+        user: JSON.parse(localStorage.getItem('user')),
         title: `Group Expenses`,
         groupsList: JSON.parse(localStorage.getItem('groupsList')) || [],
         entriesList: JSON.parse(localStorage.getItem('entriesList')) || [],
@@ -74,7 +74,6 @@ export default new Vuex.Store({
         async authRequest ({commit}, { email, password }) {
             try {
                 const res = await authenticateService.login({ email, password });
-                console.log(res)
                 const token = res.data.data.token;
                 const user = res.data.data.user;
                 commit("authSuccess", {token, user});
@@ -82,15 +81,13 @@ export default new Vuex.Store({
                 await localStorage.setItem('user', JSON.stringify(user));
             } catch (err) {
                 commit("authError");
-                await localStorage.removeItem('user-token') // if the request fails, remove any possible user token if possible
-                await localStorage.removeItem('user');
+                await localStorage.clear();
                 throw err;
             }
         },
         async authLogout ({commit}) {
             commit("authLogout");
-            await localStorage.removeItem('user-token');
-            await localStorage.removeItem('user');
+            await localStorage.clear();
             delete axios.defaults.headers.common['Authorization'];
         },
         async setEntriesList ({commit}) {
