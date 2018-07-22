@@ -6,7 +6,7 @@
         <div class="md-layout md-gutter">
           <div class="md-layout-item md-small-size-100">
             <md-field>
-              <label for="email">email/Email</label>
+              <label for="email">Email</label>
               <md-input v-focus v-model="email" type="text" name="email" required :disabled="sending"/>
             </md-field>
             <md-field>

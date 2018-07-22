@@ -57,7 +57,8 @@ export default {
         })
     },
     async openEntry(entryId) {
-      alert(JSON.stringify(_.find(this.entries, {id: entryId})));
+      this.$router.push('/expense/' + entryId);
+      // alert(JSON.stringify(_.find(this.entries, {id: entryId})));
     }
   }
 };

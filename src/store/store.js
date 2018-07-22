@@ -88,7 +88,7 @@ export default new Vuex.Store({
         async authLogout ({commit}) {
             commit("authLogout");
             await localStorage.clear();
-            delete axios.defaults.headers.common['Authorization'];
+            delete axios.defaults.headers.common['x-access-token'];
         },
         async setEntriesList ({commit}) {
             entryService.getEntries()
