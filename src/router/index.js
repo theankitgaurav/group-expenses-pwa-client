@@ -5,8 +5,6 @@ import store from '@/store/store'
 Vue.use(Router);
 /**
  * Function to dynamically import a Vue component
- * FIXME: ESLint may raise error due to the fact that 
- * it can’t recognize the import function
  * @param {any} view 
  * @returns 
  */

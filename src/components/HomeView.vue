@@ -5,7 +5,7 @@
         <md-list-item @click="openEntry(item.id)">
           <md-icon class="md-primary">phone</md-icon>
           <div class="md-list-item-text">
-            <span>Rs. {{item.amount}} for {{item.category}}</span>
+            <span>₹ {{item.amount}} for {{item.category}}</span>
             <span>Paid by: {{item.paidBy}} in {{item.groupName}}</span>
           </div>
         </md-list-item>
@@ -23,42 +23,25 @@
   </div>
 </template>
 
-
-
-
 <script>
-import * as _ from 'lodash';
 export default {
-  data () {
-      return {
-          loading: true
-      };
-  },
   async mounted () {
     this.refreshHome();
   },
   computed: {
     entries () {
-      return this.$store.state.entriesList
+      return this.$store.state.entriesList;
     }
   },
   methods: {
     addExpense () {
-        this.$router.push("/new-entry");
+      this.$router.push("/new-entry");
     },
     refreshHome() {
-      const self = this;
-      this.$store.dispatch('setEntriesList')
-        .then((res)=>{
-          console.log('Result of dispatching setEntriesList action', res);
-        })
-        .catch((err)=>{
-          console.error('Dispatching setEntriesList action gave error: ', err);
-        })
+      this.$store.dispatch('setEntriesList');
     },
     async openEntry(entryId) {
       this.$router.push('/expense/' + entryId);
-      // alert(JSON.stringify(_.find(this.entries, {id: entryId})));
     }
   }
 };
