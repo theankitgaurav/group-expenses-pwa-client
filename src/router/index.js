@@ -55,14 +55,14 @@ const router = new Router({
     {
       path: '/home',
       name: 'home',
-      meta: {title: "Group Expenses"},
-      component: loadView('HomeView'),
+      meta: {title: "Expenses"},
+      component: loadView('ExpenseList'),
       beforeEnter: ifAuthenticated
     },
     {
       path: '/new-entry',
-      name: 'newEntry',
-      meta: {title: "New Entry"},
+      name: 'newExpense',
+      meta: {title: "Add new bill"},
       component: loadView('PostEntryView'),
       beforeEnter: ifAuthenticated
     },

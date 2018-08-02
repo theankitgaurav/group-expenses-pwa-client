@@ -15,7 +15,7 @@
             </md-button>
             <md-menu-content>
               <md-menu-item>
-                Hi, {{username}}
+                Hi, there
               </md-menu-item>
               <md-divider/>
               <md-menu-item @click="logout">Logout</md-menu-item>
@@ -43,9 +43,6 @@ export default {
   computed: {
     title() {
       return this.$store.state.title
-    },
-    username() {
-      return this.$store.state.user ? this.$store.state.user.name : "";
     }
   },
   watch: {

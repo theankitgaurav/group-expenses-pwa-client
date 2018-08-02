@@ -1,15 +1,20 @@
 <template>
-  <md-card class="md-layout-item md-size-50 md-small-size-100">
+  <md-card>
+    <md-card-header>
+      <md-card-header-text>
+        <div class="md-title">₹: {{expense.amount}} for {{expense.category}}</div>
+        <div class="md-subhead">Paid by {{expense.paidBy}} on on {{getFormattedDate(expense.paidOn)}}</div>
+      </md-card-header-text>
+    </md-card-header>
+
     <md-card-content>
-      <div class="md-layout md-gutter">
-        <div class="md-layout-item md-small-size-100">
-            <md-icon class="md-primary">phone</md-icon>
-            <span>Spent ₹: {{expense.amount}} by {{expense.paidBy}}</span><br/>
-            <span>For {{expense.category}} on {{getFormattedDate(expense.paidOn)}}</span>
-        </div>
-      </div>
+      {{expense.details}}
     </md-card-content>
- </md-card>
+
+    <md-card-actions md-alignment="left">
+      <md-button>Delete</md-button>
+    </md-card-actions>
+  </md-card>
 </template>
 
 <script>
