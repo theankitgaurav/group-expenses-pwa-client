@@ -24,9 +24,11 @@
         </div>
       </md-app-toolbar>
       <md-app-content>
-        <md-tabs md-sync-route md-alignment="fixed" v-show="this.$store.state.appConfig.enableNavigationTabs">
+        <md-tabs md-sync-route md-alignment="fixed" 
+        md-active-tab="tab-home" 
+        v-show="this.$store.state.appConfig.enableNavigationTabs">
           <md-tab id="tab-home" md-label="All" to="home" />
-          <md-tab id="tab-pages" md-label="Groups" to="groups" />
+          <md-tab id="tab-groups" md-label="Groups" to="groups" />
         </md-tabs>
         <router-view></router-view>
       </md-app-content>
@@ -56,9 +58,6 @@ export default {
   methods: {
     goBack() {
       this.$router.push('/home');
-      // window.history.length > 1 ?
-      //   this.$router.go(-1) :
-      //   this.$router.push('/home')
     },
     goHome() {
       this.$router.replace('/home');

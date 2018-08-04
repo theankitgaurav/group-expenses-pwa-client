@@ -56,7 +56,7 @@ const router = new Router({
       path: '/home',
       name: 'home',
       meta: {title: "Expenses"},
-      component: loadView('ExpenseList'),
+      component: loadView('ExpensesView'),
       beforeEnter: ifAuthenticated
     },
     {
@@ -77,7 +77,7 @@ const router = new Router({
       path: '/expense/:id',
       name: 'expense',
       meta: {title: "Expense"},
-      component: loadView('ExpenseView'),
+      component: loadView('Expense'),
       beforeEnter: ifAuthenticated
     }
   ]

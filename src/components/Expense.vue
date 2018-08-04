@@ -3,7 +3,7 @@
     <md-card-header>
       <md-card-header-text>
         <div class="md-title">₹: {{expense.amount}} for {{expense.category}}</div>
-        <div class="md-subhead">Paid by {{expense.paidBy}} on on {{getFormattedDate(expense.paidOn)}}</div>
+        <div class="md-subhead">Paid by {{expense.paidBy}} on {{getFormattedDate(expense.paidOn)}}</div>
       </md-card-header-text>
     </md-card-header>
 
@@ -46,5 +46,7 @@ export default {
 </script>
 
 <style scoped>
-
+.md-card {
+  margin: 0;
+}
 </style>
