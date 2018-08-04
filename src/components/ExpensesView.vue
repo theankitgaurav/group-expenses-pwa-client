@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     addExpense () {
-      this.$router.push("/new-entry");
+      this.$router.push("/new-expense");
     },
     refreshHome() {
       this.$store.dispatch('setEntriesList');

@@ -60,10 +60,17 @@ const router = new Router({
       beforeEnter: ifAuthenticated
     },
     {
-      path: '/new-entry',
+      path: '/expense/:id',
+      name: 'expense',
+      meta: {title: "Expense"},
+      component: loadView('ExpenseDetail'),
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/new-expense',
       name: 'newExpense',
-      meta: {title: "Add new bill"},
-      component: loadView('PostEntryView'),
+      meta: {title: "Add a bill"},
+      component: loadView('AddExpense'),
       beforeEnter: ifAuthenticated
     },
     {
@@ -71,13 +78,6 @@ const router = new Router({
       name: 'groups',
       meta: {title: 'Group Expenses'},
       component: loadView('GroupsView'),
-      beforeEnter: ifAuthenticated
-    },
-    {
-      path: '/expense/:id',
-      name: 'expense',
-      meta: {title: "Expense"},
-      component: loadView('Expense'),
       beforeEnter: ifAuthenticated
     }
   ]
