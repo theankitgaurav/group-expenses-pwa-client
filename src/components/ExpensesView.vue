@@ -45,9 +45,6 @@ export default {
 </script> 
 
 <style>
-.md-content {
-  padding: 0px;
-}
 .md-list {
   padding: 0px;
 }

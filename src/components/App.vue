@@ -90,5 +90,7 @@ export default {
 </script>
 
 <style scoped>
-
+.md-content {
+  padding: 0px;
+}
 </style>

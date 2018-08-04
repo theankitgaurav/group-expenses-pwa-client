@@ -1,34 +1,6 @@
 <template>
-  <transition name="bounce">
-    <div>
+    <md-card class="md-layout-item md-size-50 md-small-size-100">
       <form novalidate @submit.prevent="saveEntry">
-        <div class="row-1">
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item md-size-75">
-              <md-autocomplete v-model="form.expenseCategory" :md-options="categoryList">
-                <label>Category</label>
-              </md-autocomplete>
-            </div>
-            <div class="md-layout-item md-size-25">
-              <md-field>
-                <label>Amount</label>
-                <span class="md-prefix">₹</span>
-                <md-input v-model="form.expenseAmount" type="number"></md-input>
-              </md-field>
-            </div>
-          </div>
-        </div>
-        <div class="row-2">
-          <div class="md-layout md-gutter">
-            <div class="md-layout-item">
-              <md-field>
-                <label>Details</label>
-                <md-textarea v-model="form.expenseDetails"></md-textarea>
-              </md-field>
-            </div>
-          </div>
-        </div>
-        <div class="row-3">
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-33">
               <md-field>
@@ -52,18 +24,38 @@
               </md-field>
             </div>
           </div>
-        </div>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item">
+              <md-field>
+                <label>Details</label>
+                <md-textarea v-model="form.expenseDetails"></md-textarea>
+              </md-field>
+            </div>
+          </div>
+          <div class="md-layout md-gutter">
+            <div class="md-layout-item md-size-33">
+              <md-field>
+                <label>Amount</label>
+                <span class="md-prefix">₹</span>
+                <md-input v-model="form.expenseAmount" type="number"></md-input>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-size-33">
+              <md-autocomplete v-model="form.expenseCategory" :md-options="categoryList">
+                <label>Category</label>
+              </md-autocomplete>
+            </div>
+          </div>
       </form>
       <md-button @click="saveEntry" class="md-fab md-primary md-fab-bottom-right ">
         <md-icon>done</md-icon>
       </md-button>
       <md-snackbar md-position="center" :md-active.sync="error" class="error">{{errorMsg}}</md-snackbar>
-    </div>
-  </transition>
+    </md-card>
 </template>
 
 <script>
-import entryService from '@/services/entryService';
+import {secure} from '@/api';
 export default {
   data() {
     return {
@@ -85,7 +77,7 @@ export default {
   methods: {
     async saveEntry() {
       this.validateExpense();
-      entryService.saveEntry(this.form)
+      secure.saveEntry(this.form)
         .then((res) => {
           console.log("New post saved", res);
           console.log('Form: ', this.form);
@@ -111,31 +103,11 @@ export default {
 
 </script>
 
-<style>
+<style <style scoped>
 .error {
   color: red;
 }
-.bounce-enter-active {
-  animation: bounce-in .05s;
-}
-.bounce-leave-active {
-  animation: bounce-in .1s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  25% {
-    transform: scale(.25);
-  }
-  50% {
-    transform: scale(.5);
-  }
-  75% {
-    transform: scale(.75);
-  }
-  100% {
-    transform: scale(1);
-  }
+.md-card {
+  padding: 0px 10px;
 }
 </style>
