@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex';
-import authenticateService from "@/services/authenticateService";
-import entryService from "@/services/entryService";
+import {register, login, secure} from '@/api';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -73,7 +72,7 @@ export default new Vuex.Store({
     actions: {
         async authRequest ({commit}, { email, password }) {
             try {
-                const res = await authenticateService.login({ email, password });
+                const res = await login({ email, password });
                 const token = res.data.data.token;
                 const user = res.data.data.user;
                 commit("authSuccess", {token, user});
@@ -91,7 +90,7 @@ export default new Vuex.Store({
             delete axios.defaults.headers.common['x-access-token'];
         },
         async setEntriesList ({commit}) {
-            entryService.getEntries()
+            secure.getEntries()
             .then((res)=>{
                 console.log('Entries: ', res)
                 const listOfEntries = res.data.data;

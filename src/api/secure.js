@@ -13,10 +13,15 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-export function getEntries() {
+function getEntries() {
   return axios.get(config.baseURL + '/expense');
 }
 
-export function saveEntry(expenseForm) {
+function saveEntry(expenseForm) {
   return axios.post(config.baseURL + '/expense', expenseForm);
+}
+
+export default {
+  getEntries,
+  saveEntry
 }

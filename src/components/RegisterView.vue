@@ -33,7 +33,7 @@
 
 
 <script>
-import authenticateService from '@/services/authenticateService';
+import {secure} from '@/api';
 export default {
   data() {
     return {
@@ -48,7 +48,7 @@ export default {
   methods: {
     register() {
       this.sending = true;
-      authenticateService.register({
+      secure.register({
           name: this.name,
           email: this.email,
           password: this.password
