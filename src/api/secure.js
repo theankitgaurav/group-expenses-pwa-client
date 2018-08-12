@@ -1,6 +1,6 @@
 import axios from 'axios';
 import config from '@/config.js';
-import store from '@/store/store';
+import store from '@/store';
 
 
 // This block intercepts all axios requests and appends token

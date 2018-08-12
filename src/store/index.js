@@ -1,16 +1,29 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import Vuex from 'vuex';
-import glabal from './modules/global';
-import groups from './modules/groups';
-import expenses from './modules/expenses';
+import getters from './getters';
+import mutations from './mutations';
+import actions from './actions';
+import plugins from './plugins';
 
 Vue.use(Vuex);
 
+const state = {
+    token: localStorage.getItem('token'),
+    user: JSON.parse(localStorage.getItem('user')),
+    title: `Group Expenses`,
+    groupsList: JSON.parse(localStorage.getItem('groupsList')) || [],
+    entriesList: JSON.parse(localStorage.getItem('entriesList')) || [],
+    appConfig: {
+        enableNavigationTabs: false,
+        backButtonRequired: false,
+    }
+};
+
 export default new Vuex.Store({
-  modules: {
-    glabal,
-    expenses,
-    groups
-  },
-  strict: process.env.NODE_ENV !== 'production'
-});
+    strict: true,
+    state,
+    getters,
+    mutations,
+    actions,
+    plugins
+}); 

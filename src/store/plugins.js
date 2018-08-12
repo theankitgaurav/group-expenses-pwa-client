@@ -1,16 +1,15 @@
-import { GLOBAL_STORAGE_KEY } from '@/store/modules/global';
-import { EXPENSES_STORAGE_KEY } from '@/store/modules/expenses';
-import { GROUPS_STORAGE_KEY } from '@/store/modules/groups';
+import data from '@/utils/data';
 
 const localStoragePlugin = store => {
-  store.subscribe((mutation, { global }) => {
-    window.localStorage.setItem(GLOBAL_STORAGE_KEY, JSON.stringify(global));
-  });
-  store.subscribe((mutation, { expenses }) => {
-    window.localStorage.setItem(EXPENSES_STORAGE_KEY, JSON.stringify(expenses));
-  });
-  store.subscribe((mutation, { groups }) => {
-    window.localStorage.setItem(GROUPS_STORAGE_KEY, JSON.stringify(groups));
+  store.subscribe((mutation, { token, user, entriesList}) => {
+    if (mutation.type === 'authSuccess') {
+      window.localStorage.setItem('token', token);
+      window.localStorage.setItem('user', JSON.stringify(user));
+    } else if (mutation.type === 'setEntriesList') {
+      window.localStorage.setItem('entriesList', JSON.stringify(entriesList));
+    } else if (mutation.type === 'authLogout') {
+      window.localStorage.clear();
+    }
   });
 };
 
