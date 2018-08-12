@@ -1,13 +1,11 @@
-import data from '@/utils/data';
-
 const localStoragePlugin = store => {
   store.subscribe((mutation, { token, user, entriesList}) => {
-    if (mutation.type === 'authSuccess') {
-      window.localStorage.setItem('token', token);
+    if (mutation.type === 'AUTH_SUCCESS') {
+      window.localStorage.setItem('token', JSON.stringify(token));
       window.localStorage.setItem('user', JSON.stringify(user));
-    } else if (mutation.type === 'setEntriesList') {
+    } else if (mutation.type === 'SET_EXPENSES') {
       window.localStorage.setItem('entriesList', JSON.stringify(entriesList));
-    } else if (mutation.type === 'authLogout') {
+    } else if (mutation.type === 'AUTH_LOGOUT') {
       window.localStorage.clear();
     }
   });

@@ -7,7 +7,7 @@ export default {
             const res = await login({ email, password });
             const token = res.data.data.token;
             const user = res.data.data.user;
-            commit("authSuccess", {token, user});
+            commit("AUTH_SUCCESS", {token, user});
         } catch (err) {
             commit("authError");
             await localStorage.clear();
@@ -16,21 +16,20 @@ export default {
     },
     async register ({commit}, {name, email, password}) {
         const res = await register({name, email, password});
-        console.log(res)
         const user = res.data.data.user;
         const token = res.data.data.token;
-        commit("authSuccess", {token, user});
+        commit("AUTH_SUCCESS", {token, user});
     },
-    async authLogout ({commit}) {
-        commit("authLogout");
+    async AUTH_LOGOUT ({commit}) {
+        commit("AUTH_LOGOUT");
         delete axios.defaults.headers.common['x-access-token'];
     },
     async getExpenses ({commit}) {
         try {
             const expenses = await secure.getEntries();
-            commit ('setEntriesList', expenses);
+            commit ('SET_EXPENSES', expenses);
         } catch (err) {
-            console.error('Error while performing setEntriesList: ', err);
+            console.error('Error while performing SET_EXPENSES: ', err);
             throw err;            
         }
     }

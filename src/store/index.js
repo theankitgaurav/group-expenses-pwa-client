@@ -8,8 +8,8 @@ import plugins from './plugins';
 Vue.use(Vuex);
 
 const state = {
-    token: localStorage.getItem('token'),
-    user: JSON.parse(localStorage.getItem('user')),
+    token: JSON.parse(localStorage.getItem('token')) || '',
+    user: JSON.parse(localStorage.getItem('user')) || {},
     title: `Group Expenses`,
     groupsList: JSON.parse(localStorage.getItem('groupsList')) || [],
     entriesList: JSON.parse(localStorage.getItem('entriesList')) || [],

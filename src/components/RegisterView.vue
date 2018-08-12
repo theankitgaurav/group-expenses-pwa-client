@@ -56,7 +56,7 @@ export default {
       .catch((err) => {
         this.sending = false;
         console.error('Error while trying to register: ', err);
-        // this.$store.dispatch("authLogout");
+        // this.$store.dispatch("AUTH_LOGOUT");
         this.error = true;
         this.errorMsg = `Error during login. Try again.`;
       });

@@ -1,5 +1,5 @@
 export default {
-    authSuccess:  (state, {token, user}) => {
+    AUTH_SUCCESS: (state, {token, user}) => {
         state.token = token;
         state.user = user;
     },
@@ -7,7 +7,7 @@ export default {
         state.token = null;
         state.user = null;
     },
-    authLogout: (state) => {
+    AUTH_LOGOUT: (state) => {
         state.token = null;
         state.user = null;
     },
@@ -20,7 +20,7 @@ export default {
     backButtonRequired: (state, value) => {
         state.appConfig.backButtonRequired = value;
     },
-    setEntriesList: (state, list) => {
+    SET_EXPENSES: (state, list) => {
         state.entriesList = list;
     },
     setGroupsList: (state, list) => {

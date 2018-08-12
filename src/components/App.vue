@@ -66,7 +66,7 @@ export default {
       this.$router.push('/login');
     },
     async logout() {
-      await this.$store.dispatch("authLogout");
+      await this.$store.dispatch("AUTH_LOGOUT");
       this.$router.push('/');
     },
     toggleBackButton(route) {
