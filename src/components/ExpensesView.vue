@@ -35,7 +35,7 @@ export default {
       this.$router.push("/new-expense");
     },
     refreshHome() {
-      this.$store.dispatch('setEntriesList');
+      this.$store.dispatch('getExpenses');
     },
     open (expenseId) {
       this.$router.push('/expense/' + expenseId);

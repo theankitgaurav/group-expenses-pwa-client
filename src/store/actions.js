@@ -14,19 +14,24 @@ export default {
             throw err;
         }
     },
+    async register ({commit}, {name, email, password}) {
+        const res = await register({name, email, password});
+        console.log(res)
+        const user = res.data.data.user;
+        const token = res.data.data.token;
+        commit("authSuccess", {token, user});
+    },
     async authLogout ({commit}) {
         commit("authLogout");
         delete axios.defaults.headers.common['x-access-token'];
     },
-    async setEntriesList ({commit}) {
-        secure.getEntries()
-        .then((res)=>{
-            const listOfEntries = res.data.data;
-            commit('setEntriesList', listOfEntries);
-        })
-        .catch((err)=>{
+    async getExpenses ({commit}) {
+        try {
+            const expenses = await secure.getEntries();
+            commit ('setEntriesList', expenses);
+        } catch (err) {
             console.error('Error while performing setEntriesList: ', err);
-            throw err;
-        })
+            throw err;            
+        }
     }
 }

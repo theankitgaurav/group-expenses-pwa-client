@@ -48,21 +48,18 @@ export default {
   methods: {
     register() {
       this.sending = true;
-      secure.register({
-          name: this.name,
-          email: this.email,
-          password: this.password
-        })
-        .then((res) => {
-          console.log(`Response from server: `, res);
-          this.$router.push('/home');
-        })
-        .catch((err) => {
-          this.sending = false;
-          console.log(`Error during auth`, err);
-          this.error = true;
-          this.errorMsg = `Error during login. Try again.`;
-        });
+      const {name, email, password} = this;
+      this.$store.dispatch("register", {name, email, password})
+      .then((res) => {
+        this.$router.push('/home');
+      })
+      .catch((err) => {
+        this.sending = false;
+        console.error('Error while trying to register: ', err);
+        // this.$store.dispatch("authLogout");
+        this.error = true;
+        this.errorMsg = `Error during login. Try again.`;
+      });
     }
   }
 };

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '@/config.js';
 import store from '@/store';
-
+import data from '@/utils/data';
 
 // This block intercepts all axios requests and appends token
 // headers 
@@ -13,11 +13,12 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-function getEntries() {
-  return axios.get(config.baseURL + '/expense');
+async function getEntries() {
+  // return axios.get(config.baseURL + '/expense');
+  return data.expenses;
 }
 
-function saveEntry(expenseForm) {
+async function saveEntry(expenseForm) {
   return axios.post(config.baseURL + '/expense', expenseForm);
 }
 
