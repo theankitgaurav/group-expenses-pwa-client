@@ -1,6 +1,6 @@
 # group-expenses
 
-> PWA client for group expenses REST api
+> PWA client for [group expenses REST api](https://github.com/ankitgaurav/group-expenses)
 
 ## Build Setup
 
