@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import glabal from './modules/global';
-import groups from './modules/groups';
-import expenses from './modules/expenses';
+import global from './modules/global';
+import group from './modules/group';
+import expense from './modules/expense';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    glabal,
-    expenses,
-    groups
+    global,
+    expense,
+    group
   },
   strict: process.env.NODE_ENV !== 'production'
 });

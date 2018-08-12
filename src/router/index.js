@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import store from '@/store/store'
+import store from '@/store'
 
 Vue.use(Router);
 /**
@@ -14,7 +14,7 @@ function loadView(view) {
 
 
 const ifNotAuthenticated = (to, from, next) => {
-  if (!store.getters.isAuthenticated) {
+  if (!store.getters['global/isAuthenticated']) {
     next()
     return
   }
@@ -22,11 +22,10 @@ const ifNotAuthenticated = (to, from, next) => {
 }
 
 const ifAuthenticated = (to, from, next) => {
-  if (store.getters.isAuthenticated) {
-    next()
-    return
+  if (store.getters['global/isAuthenticated']) {
+    return next();
   }
-  next('/login')
+  next('/login');
 }
 
 const router = new Router({

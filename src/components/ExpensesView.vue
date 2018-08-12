@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     expenses () {
-      return this.$store.state.entriesList;
+      return this.$store.state.expense.expenses;
     }
   },
   methods: {
@@ -35,7 +35,7 @@ export default {
       this.$router.push("/new-expense");
     },
     refreshHome() {
-      this.$store.dispatch('setEntriesList');
+      this.$store.dispatch('expense/getAllExpenses');
     },
     open (expenseId) {
       this.$router.push('/expense/' + expenseId);

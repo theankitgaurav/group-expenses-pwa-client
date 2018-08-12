@@ -48,20 +48,20 @@ export default {
     }
   },
   methods: {
-    login() {
+    async login() {
       const self = this;
       self.sending = true;
       const { email, password } = self;
-      self.$store.dispatch("authRequest", { email, password })
-      .then(function (res) {
+
+      try {
+        await self.$store.dispatch("global/login", { email, password });
         self.$router.push('/home');
-      })
-      .catch (function (err) {
+      } catch (err) {
         self.sending = false;
-        console.log(`Error during auth`, err);
         self.error = true;
         self.errorMsg = `Error during login. Try again.`;
-      })
+      }
+
     }
   }
 };

@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from '@/components/App'
 import router from './router'
 import {sync} from 'vuex-router-sync'
-import store from '@/store/store'
+import store from '@/store'
 import { MdButton, MdContent, MdTabs, MdApp, MdAutocomplete, MdAvatar,
   MdDatepicker, MdDivider, MdElevation, MdEmptyState, MdField, MdIcon,
   MdImage, MdLayout, MdList, MdMenu, MdProgress, MdRipple, 

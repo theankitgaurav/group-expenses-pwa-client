@@ -1,7 +1,7 @@
 <template>
   <div class="page-container" id="app">
     <md-app>
-      <md-app-toolbar class="md-primary" @click="goHome">
+      <!-- <md-app-toolbar class="md-primary" @click="goHome">
         <div class="md-toolbar-section-start">
           <md-button class="md-icon-button" @click.native="goBack" v-show="this.$store.state.appConfig.backButtonRequired">
             <md-icon>arrow_back</md-icon>
@@ -22,11 +22,11 @@
             </md-menu-content>
           </md-menu>
         </div>
-      </md-app-toolbar>
+      </md-app-toolbar> -->
       <md-app-content>
         <md-tabs md-sync-route md-alignment="fixed" 
         md-active-tab="tab-home" 
-        v-show="this.$store.state.appConfig.enableNavigationTabs">
+        v-show="this.$store.state.global.appConfig.enableNavigationTabs">
           <md-tab id="tab-home" md-label="All" to="home" />
           <md-tab id="tab-groups" md-label="Groups" to="groups" />
         </md-tabs>
@@ -49,10 +49,10 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      this.toggleBackButton(to);
-      this.toggleNavigationTabs(to);
-      // Set title based on routes
-      this.$store.commit("setTitle", to.meta.title);
+      // this.toggleBackButton(to);
+      // this.toggleNavigationTabs(to);
+      // // Set title based on routes
+      // this.$store.commit("setTitle", to.meta.title);
     }
   },
   methods: {
@@ -66,24 +66,8 @@ export default {
       this.$router.push('/login');
     },
     async logout() {
-      await this.$store.dispatch("authLogout");
+      await this.$store.global.dispatch("AUTH_CLEAR");
       this.$router.push('/');
-    },
-    toggleBackButton(route) {
-      const routeName = route.name;
-      this.$store.commit("backButtonRequired", this.isBackButtonRequired(routeName));
-    },
-    isBackButtonRequired(routeName) {
-      const arrayOfViewsWithoutBackButton = ['index', 'login', 'register', 'home', 'groups'];
-      return !arrayOfViewsWithoutBackButton.includes(routeName);
-    },
-    toggleNavigationTabs(route) {
-      const routeName = route.name;
-      this.$store.commit("enableNavigationTabs", this.isNavigationTabRequired(routeName));
-    },
-    isNavigationTabRequired(routeName) {
-      const arrayOfViewsWithoutNavTabs = ['home', 'groups'];
-      return arrayOfViewsWithoutNavTabs.includes(routeName);
     }
   }
 }
