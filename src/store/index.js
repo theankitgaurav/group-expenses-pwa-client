@@ -4,15 +4,16 @@ import getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
 import plugins from './plugins';
+import constants from '@/utils/constants';
 
 Vue.use(Vuex);
 
 const state = {
-    token: JSON.parse(localStorage.getItem('token')) || '',
-    user: JSON.parse(localStorage.getItem('user')) || {},
+    token: JSON.parse(localStorage.getItem(constants.TOKEN)) || '',
+    user: JSON.parse(localStorage.getItem(constants.USER)) || {},
     title: `Group Expenses`,
-    groupsList: JSON.parse(localStorage.getItem('groupsList')) || [],
-    entriesList: JSON.parse(localStorage.getItem('entriesList')) || [],
+    groupsList: JSON.parse(localStorage.getItem(constants.GROUPS)) || [],
+    entriesList: JSON.parse(localStorage.getItem(constants.EXPENSES)) || [],
     appConfig: {
         enableNavigationTabs: false,
         backButtonRequired: false,
