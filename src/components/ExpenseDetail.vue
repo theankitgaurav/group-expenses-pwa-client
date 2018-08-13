@@ -3,7 +3,7 @@
     <md-card-header>
       <md-card-header-text>
         <div class="md-title">₹ {{expense.amount}} for {{expense.category}}</div>
-        <div class="md-subhead">Paid by {{expense.paidBy}} on {{getFormattedDate(expense.paidOn)}}</div>
+        <div class="md-subhead">Paid by {{expense.paidBy}} on {{expense.paidOn | formatDate}}</div>
       </md-card-header-text>
     </md-card-header>
 
@@ -28,7 +28,6 @@ export default {
     }
   },
   methods: {
-    getFormattedDate: utils.getFormattedDate,
     getExpense() {
         try {
             const expenseId = Number(this.$store.state.route.params.id);
@@ -39,8 +38,10 @@ export default {
             console.error(err);
             this.$router.push('/home');
         }
-
     }
+  },
+  filters: {
+    formatDate: utils.getFormattedDate
   }
 }
 </script>

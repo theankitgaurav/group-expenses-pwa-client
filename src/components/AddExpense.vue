@@ -6,7 +6,9 @@
               <md-field>
                 <md-icon>perm_identity</md-icon>
                 <label>Paid By</label>
-                <md-input v-model="form.expenseBy" />
+                <md-select v-model="form.expenseBy" name="paidBy" id="paidBy">
+                  <md-option v-for="paidBy in groupMemberList" :key="paidBy.id" :value="paidBy.id">{{paidBy.name}}</md-option>
+                </md-select>
               </md-field>
             </div>
             <div class="md-layout-item md-size-33">
@@ -18,8 +20,8 @@
               <md-field>
                 <md-icon>group</md-icon>
                 <label>Group</label>
-                <md-select v-for="group in groups" :key="group.id" v-model="form.expenseGroup" name="group" id="group">
-                  <md-option :value="group.id">{{group.name}}</md-option>
+                <md-select v-model="form.expenseGroup" name="group" id="group">
+                  <md-option v-for="group in groups" :key="group.id" :value="group.id">{{group.name}}</md-option>
                 </md-select>
               </md-field>
             </div>
@@ -41,7 +43,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-33">
-              <md-autocomplete v-model="form.expenseCategory" :md-options="categoryList">
+              <md-autocomplete v-model="form.category" :md-options="categoryList">
                 <label>Category</label>
               </md-autocomplete>
             </div>
@@ -61,7 +63,7 @@ export default {
     return {
       groups: [{id:26, name: 'Personal'}, {id: 2, name: 'hhdi'}],
       form: {
-        expenseCategory: "",
+        category: "",
         expenseAmount: "",
         expenseBy: "",
         expenseOn: null,
@@ -70,7 +72,7 @@ export default {
       },
       error: false,
       errorMsg: null,
-      groupMemberList: ['Manish', 'Surit', 'Ankit'],
+      groupMemberList: [{id: 1, name: 'Self'}, {id: 2, name: 'Manish'}, {id: 3, name: 'Surit'}],
       categoryList: ['Veggies', 'Flour', 'Rice', 'Stationary', 'Detergent']
     }
   },
@@ -79,8 +81,6 @@ export default {
       this.validateExpense();
       secure.saveEntry(this.form)
         .then((res) => {
-          console.log("New post saved", res);
-          console.log('Form: ', this.form);
           this.message = `New post saved: `, res;
           this.$router.push('/home');
         })
@@ -91,7 +91,7 @@ export default {
         });
     },
     validateExpense () {
-      if(!this.form.expenseCategory) this.form.expenseCategory = 'Others';
+      if(!this.form.category) this.form.category = 'Others';
       if(!this.form.expenseAmount) this.form.expenseAmount = 10;
       if(!this.form.expenseBy) this.form.expenseBy = this.$store.state.user.id;
       if(!this.form.expenseOn) this.form.expenseOn = new Date;
