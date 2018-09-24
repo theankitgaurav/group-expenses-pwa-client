@@ -22,7 +22,22 @@ async function saveEntry(expenseForm) {
   return axios.post(config.baseURL + '/expense', expenseForm);
 }
 
+async function getGroups () {
+  return axios.get(config.baseURL + '/group');
+}
+
+async function getCategories (groupId) {
+  return axios.get(`${config.baseURL}/group/${groupId}/category`);
+}
+
+async function getGroupMemebers (groupId) {
+  return axios.get(`${config.baseURL}/group/${groupId}/member`);
+}
+
 export default {
+  getCategories,
   getEntries,
+  getGroupMemebers,
+  getGroups,
   saveEntry
 }

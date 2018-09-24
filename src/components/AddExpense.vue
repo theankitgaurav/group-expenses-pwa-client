@@ -4,6 +4,18 @@
           <div class="md-layout md-gutter">
             <div class="md-layout-item md-size-33">
               <md-field>
+                <md-icon>group</md-icon>
+                <label>Group</label>
+                <md-select v-model="form.expenseGroup" name="group" id="group"
+                    v-model.lazy="groupSelection">
+                  <md-option v-for="group in groups" 
+                    :key="group.id" 
+                    :value="group.id">{{group.name}}</md-option>
+                </md-select>
+              </md-field>
+            </div>
+            <div class="md-layout-item md-size-33">
+              <md-field>
                 <md-icon>perm_identity</md-icon>
                 <label>Paid By</label>
                 <md-select v-model="form.expenseBy" name="paidBy" id="paidBy">
@@ -15,15 +27,6 @@
               <md-datepicker v-model="form.expenseOn" md-immediately>
                 <label>Paid On</label>
               </md-datepicker>
-            </div>
-            <div class="md-layout-item md-size-33">
-              <md-field>
-                <md-icon>group</md-icon>
-                <label>Group</label>
-                <md-select v-model="form.expenseGroup" name="group" id="group">
-                  <md-option v-for="group in groups" :key="group.id" :value="group.id">{{group.name}}</md-option>
-                </md-select>
-              </md-field>
             </div>
           </div>
           <div class="md-layout md-gutter">
@@ -43,7 +46,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-33">
-              <md-autocomplete v-model="form.category" :md-options="categoryList">
+              <md-autocomplete v-model="form.category" :md-options="categoriesList">
                 <label>Category</label>
               </md-autocomplete>
             </div>
@@ -61,7 +64,8 @@ import {secure} from '@/api';
 export default {
   data() {
     return {
-      groups: [{id:26, name: 'Personal'}, {id: 2, name: 'hhdi'}],
+      groupSelection: null,
+      groups: [], // Shape: [{id,name}]
       form: {
         category: "",
         expenseAmount: "",
@@ -73,7 +77,19 @@ export default {
       error: false,
       errorMsg: null,
       groupMemberList: [{id: 1, name: 'Self'}, {id: 2, name: 'Manish'}, {id: 3, name: 'Surit'}],
-      categoryList: ['Veggies', 'Flour', 'Rice', 'Stationary', 'Detergent']
+      categoriesList: [] // Shape: [categoryString]
+    }
+  },
+  async mounted () {
+    await this.populateGroups();
+  },
+  watch: {
+    groupSelection: {
+      handler: function (newGroupSelection) {
+        console.log('newGroupSelection: ', newGroupSelection);
+        this.populateCategories();
+        this.populateGroupMembers();
+      }
     }
   },
   methods: {
@@ -89,6 +105,19 @@ export default {
           this.error = true;
           this.errorMsg = err.response.data;
         });
+    },
+    async populateGroups () {
+      const groupsArr = await secure.getGroups();
+      this.groups = groupsArr.data.data;
+    },
+    async populateCategories () {
+      const categoriesArr = await secure.getCategories(this.groupSelection);
+      this.categoriesList = categoriesArr.data.data;
+    },
+    async populateGroupMembers () {
+      const groupMemebersArr = await secure.getGroupMemebers(this.groupSelection);
+      this.groupMemberList = groupMemebersArr.data.data;
+      console.log(groupMemebersArr)
     },
     validateExpense () {
       if(!this.form.category) this.form.category = 'Others';
