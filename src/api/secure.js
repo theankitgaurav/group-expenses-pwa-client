@@ -14,8 +14,8 @@ axios.interceptors.request.use(function (config) {
 });
 
 async function getEntries() {
-  // return axios.get(config.baseURL + '/expense');
-  return data.expenses;
+  return axios.get(config.baseURL + '/expense');
+  // return data.expenses;
 }
 
 async function saveEntry(expenseForm) {

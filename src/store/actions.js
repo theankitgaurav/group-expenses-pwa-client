@@ -27,7 +27,9 @@ export default {
     async getExpenses ({commit}) {
         try {
             const expenses = await secure.getEntries();
-            commit ('SET_EXPENSES', expenses);
+            console.log('expenses: ', expenses);
+            const expensesArr = expenses.data.data || [];
+            commit ('SET_EXPENSES', expensesArr);
         } catch (err) {
             console.error('Error while performing SET_EXPENSES: ', err);
             throw err;            
