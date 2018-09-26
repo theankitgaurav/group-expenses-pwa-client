@@ -13,9 +13,12 @@ axios.interceptors.request.use(function (config) {
   return Promise.reject(error);
 });
 
-async function getEntries() {
+async function deleteExpense (expenseId) {
+  return axios.delete(config.baseURL + '/expense/' + expenseId);
+}
+
+async function getExpenses() {
   return axios.get(config.baseURL + '/expense');
-  // return data.expenses;
 }
 
 async function saveEntry(expenseForm) {
@@ -35,8 +38,9 @@ async function getGroupMemebers (groupId) {
 }
 
 export default {
+  deleteExpense,
   getCategories,
-  getEntries,
+  getExpenses,
   getGroupMemebers,
   getGroups,
   saveEntry

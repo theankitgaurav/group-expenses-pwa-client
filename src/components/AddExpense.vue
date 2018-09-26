@@ -46,7 +46,7 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-33">
-              <md-autocomplete v-model="category" :md-options="categoriesList">
+              <md-autocomplete v-model="expenseCategory" :md-options="categoriesList">
                 <label>Category</label>
               </md-autocomplete>
             </div>
@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       groups: [], // Shape: [{id,name}]
-      category: "",
+      expenseCategory: "",
       expenseAmount: "",
       expenseBy: "",
       expenseOn: null,
@@ -74,7 +74,7 @@ export default {
       error: false,
       errorMsg: null,
       groupMemberList: [], // Shape: [{id, name}]
-      categoriesList: [] // Shape: [categoryString]
+      categoriesList: [] // Shape: [expenseCategoryString]
     }
   },
   async mounted () {
@@ -92,7 +92,7 @@ export default {
   methods: {
     async saveEntry() {
       const form = {
-        category: this.category,
+        expenseCategory: this.expenseCategory,
         expenseAmount: this.expenseAmount,
         expenseBy: this.expenseBy,
         expenseOn: this.expenseOn,
@@ -124,7 +124,7 @@ export default {
       this.groupMemberList = groupMemebersArr.data.data;
     },
     validateExpense (form) {
-      if(!form.category) form.category = 'Others';
+      if(!form.expenseCategory) form.expenseCategory = 'Others';
       if(!form.expenseAmount) form.expenseAmount = 10;
       if(!form.expenseBy) form.expenseBy = this.$store.state.user.id;
       if(!form.expenseOn) form.expenseOn = new Date;

@@ -12,7 +12,7 @@
     </md-card-content>
 
     <md-card-actions md-alignment="left">
-      <md-button>Delete</md-button>
+      <md-button @click="deleteExpense()">Delete</md-button>
     </md-card-actions>
   </md-card>
 </template>
@@ -20,6 +20,7 @@
 <script>
 import _ from 'lodash';
 import utils from '@/utils';
+import {secure} from '@/api';
 
 export default {
   data() {
@@ -38,6 +39,17 @@ export default {
             console.error(err);
             this.$router.push('/home');
         }
+    },
+    async deleteExpense () {
+      const expenseId = this.expense.id;
+      try {
+        await secure.deleteExpense(expenseId);
+        this.$router.push("/home");
+      } catch (err) {
+        console.log('Error deleting expense: ', err);
+        this.error = true;
+        this.errorMsg = err.response.data;
+      }
     }
   },
   filters: {
