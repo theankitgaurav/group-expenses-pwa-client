@@ -64,15 +64,15 @@ import {secure} from '@/api';
 export default {
   data() {
     return {
-      groups: [], // Shape: [{id,name}]
-      expenseCategory: "",
-      expenseAmount: "",
-      expenseBy: "",
+      expenseCategory: null,
+      expenseAmount: null,
+      expenseBy: null,
       expenseOn: null,
-      expenseGroup: "",
-      expenseDetails: "",
+      expenseGroup: null,
+      expenseDetails: null,
       error: false,
       errorMsg: null,
+      groups: [], // Shape: [{id,name}]
       groupMemberList: [], // Shape: [{id, name}]
       categoriesList: [] // Shape: [expenseCategoryString]
     }
