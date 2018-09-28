@@ -24,9 +24,11 @@
               </md-field>
             </div>
             <div class="md-layout-item md-size-33">
-              <md-datepicker v-model="expenseOn" md-immediately>
+              <md-field>
+                <md-icon>date_range</md-icon>
                 <label>Paid On</label>
-              </md-datepicker>
+                <md-input v-model="expenseOn" type="date" aria-placeholder="" placeholder="" />
+              </md-field>
             </div>
           </div>
           <div class="md-layout md-gutter">

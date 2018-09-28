@@ -1,7 +1,9 @@
 <template>
   <div>
     <md-content v-if="this.$store.state.groupsList.length > 0">
-      <!-- <GroupList/> -->
+      <md-list class="md-double-line" v-for="group in groups" :key="group.id">
+        <GroupListItem :group="group" @open="openGroup"/>
+      </md-list>
       <md-button @click="addGroup" class="md-fab md-primary md-fab-bottom-right ">
         <md-icon>group_add</md-icon>
       </md-button>
@@ -15,10 +17,17 @@
 </template>
 
 <script>
+import GroupListItem from './GroupListItem.vue'
 export default {
+  components: {GroupListItem},
   methods: {
     addGroup() {
       this.$router.push("/new-entry");
+    }
+  },
+  computed: {
+    expenses () {
+      return this.$store.state.groupsList;
     }
   }
 };
