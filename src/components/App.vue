@@ -1,6 +1,6 @@
 <template>
   <div class="page-container" id="app">
-    <md-app>
+    <md-app v-on:update:errorMessage="errorMessage = $event">
       <md-app-toolbar class="md-primary" @click="goHome">
         <div class="md-toolbar-section-start">
           <md-button class="md-icon-button" @click.native="goBack" v-show="this.$store.state.appConfig.backButtonRequired">
@@ -27,10 +27,11 @@
         <md-tabs md-sync-route md-alignment="fixed" 
         md-active-tab="tab-home" 
         v-show="this.$store.state.appConfig.enableNavigationTabs">
-          <md-tab id="tab-home" md-label="All" to="home" />
+          <md-tab id="tab-home" md-label="All Expenses" to="home" />
           <md-tab id="tab-groups" md-label="Groups" to="groups" />
         </md-tabs>
         <router-view></router-view>
+        <md-snackbar md-position="center" :md-active.sync="showError" class="error">{{errorMessage}}</md-snackbar>
       </md-app-content>
     </md-app>
   </div>
@@ -40,10 +41,13 @@
 export default {
   name: 'app',
   data() {
-    return {};
+    return {
+      showError: this.$store.state.showError,
+      errorMessage: this.$store.state.errorMessage
+    };
   },
   computed: {
-    title() {
+    title () {
       return this.$store.state.title
     }
   },

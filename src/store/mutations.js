@@ -25,5 +25,10 @@ export default {
     },
     setGroupsList: (state, list) => {
         state.groupsList = list;
+    },
+    SHOW_ERROR: (state, err) => {
+        console.log(`Error: `, err);
+        state.showError = true;
+        state.errorMessage = err.toString();
     }
 }

@@ -36,19 +36,20 @@ export default {
             if (!expense) throw new Error('No matching expense found');
             return expense;
         } catch (err) {
-            console.error(err);
+            this.$store.commit("SHOW_ERROR", err);
             this.$router.push('/home');
         }
     },
     async deleteExpense () {
       const expenseId = this.expense.id;
       try {
-        await secure.deleteExpense(expenseId);
+        const response = await secure.deleteExpense(expenseId);
+        if (response.Status !== 200) {
+          throw new Error(response.toString());
+        }
         this.$router.push("/home");
       } catch (err) {
-        console.log('Error deleting expense: ', err);
-        this.error = true;
-        this.errorMsg = err.response.data;
+        this.$store.commit("SHOW_ERROR", err);
       }
     }
   },

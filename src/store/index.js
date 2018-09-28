@@ -17,7 +17,9 @@ const state = {
     appConfig: {
         enableNavigationTabs: false,
         backButtonRequired: false,
-    }
+    },
+    showError: false,
+    errorMessage: null
 };
 
 export default new Vuex.Store({
