@@ -18,8 +18,12 @@ const state = {
         enableNavigationTabs: false,
         backButtonRequired: false,
     },
-    showError: false,
-    errorMessage: null
+    snackBar: {
+        isHidden: true,
+        message: null,
+        duration: Infinity,
+        position: 'center'
+    }
 };
 
 export default new Vuex.Store({

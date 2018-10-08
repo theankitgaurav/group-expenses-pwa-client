@@ -27,12 +27,22 @@ export default {
     async getExpenses ({commit}) {
         try {
             const expenses = await secure.getExpenses();
-            console.log('expenses: ', expenses);
             const expensesArr = expenses.data.data || [];
             commit ('SET_EXPENSES', expensesArr);
         } catch (err) {
             console.error('Error while performing SET_EXPENSES: ', err);
             throw err;            
         }
+    },
+    async showSnack({commit}, message) {
+        if (typeof message === "object") {
+            const errorMessage = JSON.stringify(message);
+            console.error('Error:' + errorMessage);
+            commit('SHOW_SNACK', errorMessage, Infinity);
+        } else {
+            console.log('LOG: ' + message);
+            commit('SHOW_SNACK', message, 2000);
+        }
     }
 }
+

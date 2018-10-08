@@ -57,7 +57,6 @@
       <md-button @click="saveEntry" class="md-fab md-primary md-fab-bottom-right ">
         <md-icon>done</md-icon>
       </md-button>
-      <md-snackbar md-position="center" :md-active.sync="error" class="error">{{errorMsg}}</md-snackbar>
     </md-card>
 </template>
 
@@ -100,18 +99,17 @@ export default {
         expenseOn: this.expenseOn,
         expenseGroup: this.expenseGroup,
         expenseDetails: this.expenseDetails,
+      };
+
+      try {
+        const res = await secure.saveEntry(form);
+        // this.$store.dispatch('showSuccess', "New expense added");
+        throw new Error('Hehehe');
+      } catch (err) {
+        this.$store.dispatch('showError', err);
+      } finally {
+        // this.$router.push('/home');
       }
-      this.validateExpense(form);
-      secure.saveEntry(form)
-        .then((res) => {
-          this.message = `New post saved: `, res;
-          this.$router.push('/home');
-        })
-        .catch((err) => {
-          console.log('Error saving new post: ', err);
-          this.error = true;
-          this.errorMsg = err.response.data;
-        });
     },
     async populateGroups () {
       const groupsArr = await secure.getGroups();
@@ -124,13 +122,6 @@ export default {
     async populateGroupMembers () {
       const groupMemebersArr = await secure.getGroupMemebers(this.expenseGroup);
       this.groupMemberList = groupMemebersArr.data.data;
-    },
-    validateExpense (form) {
-      if(!form.expenseCategory) form.expenseCategory = 'Others';
-      if(!form.expenseAmount) form.expenseAmount = 10;
-      if(!form.expenseBy) form.expenseBy = this.$store.state.user.id;
-      if(!form.expenseOn) form.expenseOn = new Date;
-      if(!form.expenseGroup) form.expenseGroup = 'Personal';
     }
   }
 }

@@ -36,7 +36,7 @@ export default {
             if (!expense) throw new Error('No matching expense found');
             return expense;
         } catch (err) {
-            this.$store.commit("SHOW_ERROR", err);
+            this.$store.dispatch('showError', err)
             this.$router.push('/home');
         }
     },
@@ -45,11 +45,11 @@ export default {
       try {
         const response = await secure.deleteExpense(expenseId);
         if (response.Status !== 200) {
-          throw new Error(response.toString());
+          throw new Error(JOSN.stringify(response));
         }
         this.$router.push("/home");
       } catch (err) {
-        this.$store.commit("SHOW_ERROR", err);
+        this.$store.dispatch('showError', err)
       }
     }
   },

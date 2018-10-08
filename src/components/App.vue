@@ -31,9 +31,13 @@
           <md-tab id="tab-groups" md-label="Groups" to="groups" />
         </md-tabs>
         <router-view></router-view>
-        <md-snackbar md-position="center" :md-active.sync="showError" class="error">{{errorMessage}}</md-snackbar>
+        
       </md-app-content>
     </md-app>
+    <md-snackbar :md-position="center" 
+    :md-active.sync="showSnackbar"
+    :md-duration="isInfinity ? Infinity : duration"
+    >{{snackMessage}}</md-snackbar>
   </div>
 </template> 
 
@@ -42,8 +46,9 @@ export default {
   name: 'app',
   data() {
     return {
-      showError: this.$store.state.showError,
-      errorMessage: this.$store.state.errorMessage
+      showSnackbar: this.$store.state.snackNeeded,
+      snackMessage: this.$store.state.snackMessage,
+      snackDuration: this.$store.state.snackDuration
     };
   },
   computed: {
