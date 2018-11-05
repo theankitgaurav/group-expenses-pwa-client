@@ -36,7 +36,7 @@ export default {
             if (!expense) throw new Error('No matching expense found');
             return expense;
         } catch (err) {
-            this.$store.dispatch('showError', err)
+            this.$store.dispatch('showSnack', err)
             this.$router.push('/home');
         }
     },
@@ -49,7 +49,7 @@ export default {
         }
         this.$router.push("/home");
       } catch (err) {
-        this.$store.dispatch('showError', err)
+        this.$store.dispatch('showSnack', err)
       }
     }
   },

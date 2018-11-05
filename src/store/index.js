@@ -19,7 +19,6 @@ const state = {
         backButtonRequired: false,
     },
     snackBar: {
-        isHidden: true,
         message: null,
         duration: Infinity,
         position: 'center'

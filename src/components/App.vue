@@ -36,7 +36,7 @@
     </md-app>
     <md-snackbar :md-position="center" 
     :md-active.sync="showSnackbar"
-    :md-duration="isInfinity ? Infinity : duration"
+    :md-duration="snackDuration"
     >{{snackMessage}}</md-snackbar>
   </div>
 </template> 
@@ -46,9 +46,10 @@ export default {
   name: 'app',
   data() {
     return {
-      showSnackbar: this.$store.state.snackNeeded,
-      snackMessage: this.$store.state.snackMessage,
-      snackDuration: this.$store.state.snackDuration
+      center: this.$store.state.snackBar.position,
+      showSnackbar: !!this.$store.state.snackBar.message,
+      snackMessage: this.$store.state.snackBar.message,
+      snackDuration: this.$store.state.snackBar.duration
     };
   },
   computed: {

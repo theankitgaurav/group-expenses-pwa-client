@@ -36,11 +36,10 @@ export default {
     },
     async showSnack({commit}, message) {
         if (typeof message === "object") {
-            const errorMessage = JSON.stringify(message);
-            console.error('Error:' + errorMessage);
-            commit('SHOW_SNACK', errorMessage, Infinity);
+            console.error('Error:', message);
+            commit('SHOW_SNACK', message.message, Infinity);
         } else {
-            console.log('LOG: ' + message);
+            console.log('LOG: ', message);
             commit('SHOW_SNACK', message, 2000);
         }
     }
